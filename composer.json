@@ -1,11 +1,7 @@
 {
   "name": "jawira/mini-getopt",
-  "description": "Very simple wrapper for getopt() function",
   "type": "library",
-  "require-dev": {
-    "pds/skeleton": "^1.0",
-    "jawira/skeleton": "^1.4"
-  },
+  "description": "Very simple wrapper for getopt() function",
   "license": "MIT",
   "authors": [
     {
@@ -13,5 +9,14 @@
       "email": "dev@tugal.be"
     }
   ],
-  "require": {}
+  "require": {},
+  "require-dev": {
+    "jawira/skeleton": "^1.4",
+    "pds/skeleton": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jawira\\MiniGetopt\\": "src/"
+    }
+  }
 }
