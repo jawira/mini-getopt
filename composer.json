@@ -1,0 +1,17 @@
+{
+  "name": "jawira/mini-getopt",
+  "description": "Very simple wrapper for getopt() function",
+  "type": "library",
+  "require-dev": {
+    "pds/skeleton": "^1.0",
+    "jawira/skeleton": "^1.4"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jawira",
+      "email": "dev@tugal.be"
+    }
+  ],
+  "require": {}
+}
