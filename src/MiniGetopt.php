@@ -171,7 +171,7 @@ class MiniGetopt
      * @param string $long
      * @param null   $default
      *
-     * @return null|string|bool
+     * @return mixed
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
     public function getOption(string $short, string $long, $default = null)

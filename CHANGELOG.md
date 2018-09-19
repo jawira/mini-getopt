@@ -19,6 +19,9 @@ Unreleased
 
 - Created `\Jawira\MiniGetopt\MiniGetoptException`
 
+### Fixed
+
+- Fixed `\Jawira\MiniGetopt\MiniGetopt::getOption` return type is `mixed`  
 
 
 v0.0.0 - 2018-09-19
