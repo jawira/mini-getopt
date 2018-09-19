@@ -11,25 +11,25 @@ class MiniGetopt
 
     protected $options = [];
 
-    public function setRequired(string $short, string $long, string $description = '', string $placeholder = 'value')
+    public function addRequired(string $short, string $long, string $description = '', string $placeholder = 'value')
     {
-        $this->setOption(self::REQUIRED, $short, $long, $description, $placeholder);
+        $this->addOption(self::REQUIRED, $short, $long, $description, $placeholder);
         return $this;
     }
 
-    public function setOptional(string $short, string $long, string $description = '', string $placeholder = 'value')
+    public function addOptional(string $short, string $long, string $description = '', string $placeholder = 'value')
     {
-        $this->setOption(self::OPTIONAL, $short, $long, $description, $placeholder);
+        $this->addOption(self::OPTIONAL, $short, $long, $description, $placeholder);
         return $this;
     }
 
-    public function setNoValue(string $short, string $long, string $description = '')
+    public function addNoValue(string $short, string $long, string $description = '')
     {
-        $this->setOption(self::NO_VALUE, $short, $long, $description, '');
+        $this->addOption(self::NO_VALUE, $short, $long, $description, '');
         return $this;
     }
 
-    protected function setOption(string $type, string $short, string $long, string $description, string $placeholder)
+    protected function addOption(string $type, string $short, string $long, string $description, string $placeholder)
     {
         $this->validateShortAndLong($short, $long);
 
@@ -57,7 +57,7 @@ class MiniGetopt
         return !$this->noEmptyString($string);
     }
 
-    public function getopt()
+    protected function getopt()
     {
         $shortOptions = '';
         $longOptions  = [];
@@ -138,11 +138,6 @@ class MiniGetopt
         }
 
         return $default;
-    }
-
-    public function isOption(string $option): bool
-    {
-        return array_key_exists($option, $this->getopt());
     }
 
     /**
