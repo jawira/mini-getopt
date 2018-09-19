@@ -17,6 +17,24 @@ Unreleased
 
 ### Added
 
+
+v0.0.1 - 2018-09-19
+-------------------
+
+### Added
+
+- Created `\Jawira\MiniGetopt\MiniGetoptException`
+
+### Fixed
+
+- Fixed `\Jawira\MiniGetopt\MiniGetopt::getOption` return type is `mixed`  
+
+
+v0.0.0 - 2018-09-19
+-------------------
+
+### Added
+
 - Added `\Jawira\MiniGetopt\MiniGetopt` class
 - Autoloading `Jawira\MiniGetopt` in `composer.json`
 
