@@ -17,6 +17,15 @@ Unreleased
 
 ### Added
 
+- Created `\Jawira\MiniGetopt\MiniGetoptException`
+
+
+
+v0.0.0 - 2018-09-19
+-------------------
+
+### Added
+
 - Added `\Jawira\MiniGetopt\MiniGetopt` class
 - Autoloading `Jawira\MiniGetopt` in `composer.json`
 
