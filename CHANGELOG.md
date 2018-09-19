@@ -17,6 +17,12 @@ Unreleased
 
 ### Added
 
+
+v0.0.1 - 2018-09-19
+-------------------
+
+### Added
+
 - Created `\Jawira\MiniGetopt\MiniGetoptException`
 
 ### Fixed
