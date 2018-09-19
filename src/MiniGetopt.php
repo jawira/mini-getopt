@@ -171,10 +171,10 @@ class MiniGetopt
      * @param string $long
      * @param null   $default
      *
-     * @return null|string
+     * @return mixed
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function getOption(string $short, string $long, $default = null): ?string
+    public function getOption(string $short, string $long, $default = null)
     {
         $this->validateShortAndLong($short, $long);
         $getopt = $this->getopt();
