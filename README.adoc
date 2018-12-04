@@ -1,0 +1,126 @@
+= mini-getopt
+
+Very simple wrapper for `getopt()` function.
+
+:toc:
+
+image:https://poser.pugx.org/jawira/mini-getopt/v/stable[Latest Stable Version,link=https://packagist.org/packages/jawira/mini-getopt]
+image:https://poser.pugx.org/jawira/mini-getopt/downloads[Total Downloads,link=https://packagist.org/packages/jawira/mini-getopt]
+image:https://poser.pugx.org/jawira/mini-getopt/license[License,link=https://packagist.org/packages/jawira/mini-getopt]
+image:https://poser.pugx.org/jawira/mini-getopt/composerlock[composer.lock,link=https://packagist.org/packages/jawira/mini-getopt]
+image:https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square[PDS Skeleton,link=https://github.com/php-pds/skeleton]
+
+== Usage
+
+This library is composed of one class only: `\Jawira\MiniGetopt\MiniGetopt`.
+
+Since this library is only a wrapper, you should know how `getopt()` function
+works. Please read the documentation: http://php.net/manual/en/function.getopt.php[http://php.net/manual/en/function.getopt.php] 
+
+To setup `MiniGetopt` class you should use the following methods:
+
+* `MiniGetopt::addNoValue`
+* `MiniGetopt::addOptional`
+* `MiniGetopt::addRequired`
+
+To retrieve the values use:
+
+* `MiniGetopt::getOption`
+
+=== Example
+
+Imagine you have the following script:
+
+.resources/demo.php
+[source,php]
+----
+// Setup
+$getopt = new MiniGetopt();
+$getopt->addRequired('f', 'format', 'File format'); // <1>
+$getopt->addOptional('r', 'retry', 'Retry when error'); // <2>
+$getopt->addNoValue('h', 'help', 'Show help'); // <3>
+
+// Retrieving values
+$format  = $getopt->getOption('f', 'format', 'png'); // <4>
+$message = $getopt->getOption('r', 'retry'); // <5>
+$help    = $getopt->getOption('h', 'help');
+
+// Show retrieved values
+var_dump($format, $message, $help);
+----
+<1> When used a _required option_ expects to have a value.
+<2> An _optional option_ may or may not have a value.
+<3> A _no value option_ doesn't needs to have a value.
+<4> _Default value_ (`png`) is used when an option is not used in command line.
+<5> If _default value_ is not set, then `null` will be used.
+
+=== Executing the example
+
+*Using script without options*
+
+[source]
+----
+$ php resources/demo.php
+resources/demo.php:19:
+string(3) "svg"
+resources/demo.php:19:
+NULL
+resources/demo.php:19:
+NULL
+----
+
+*Using script with mandatory option*
+
+[source]
+----
+$ php resources/demo.php -fsvg
+resources/demo.php:19:
+string(3) "png"
+resources/demo.php:19:
+NULL
+resources/demo.php:19:
+NULL
+----
+
+*Using script with optional option without value*
+
+[source]
+----
+$ php resources/demo.php -f=svg --retry
+resources/demo.php:19:
+string(3) "svg"
+resources/demo.php:19:
+bool(false)
+resources/demo.php:19:
+NULL
+----
+
+*Using script with all options in long format*
+
+[source]
+----
+$ php resources/demo.php --format=svg --retry=yes --help
+resources/demo.php:19:
+string(3) "svg"
+resources/demo.php:19:
+string(3) "yes"
+resources/demo.php:19:
+bool(false)
+----
+
+== How to install
+
+Install using composer:
+
+[source]
+----
+composer require jawira/mini-getopt
+----
+
+== Requirements
+
+You will need `mbstring` extension.
+
+== License
+
+This library is licensed under the link:LICENSE.md[MIT].
