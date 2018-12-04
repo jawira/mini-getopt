@@ -1,5 +1,4 @@
-Changelog
-=========
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -12,14 +11,17 @@ All notable changes to this project will be documented in this file.
 ### Security
 -->
 
-Unreleased
-----------
+## Unreleased
 
 ### Added
 
+## [v0.0.2] - 2018-12-04
 
-v0.0.1 - 2018-09-19
--------------------
+### Changed
+
+- [#3] Improving Readme file
+
+## [v0.0.1] - 2018-09-19
 
 ### Added
 
@@ -30,8 +32,7 @@ v0.0.1 - 2018-09-19
 - Fixed `\Jawira\MiniGetopt\MiniGetopt::getOption` return type is `mixed`  
 
 
-v0.0.0 - 2018-09-19
--------------------
+## [v0.0.0] - 2018-09-19
 
 ### Added
 
@@ -60,3 +61,7 @@ Types of changes
     ### Fixed       for any bug fixes.
     ### Security    in case of vulnerabilities.
 -->
+
+[#3]: https://github.com/jawira/mini-getop/pull/3
+[v0.0.1]: https://github.com/jawira/mini-getop/compare/v0.0.0...v0.0.1
+[v0.0.2]: https://github.com/jawira/mini-getop/compare/v0.0.1...v0.0.2
