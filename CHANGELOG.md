@@ -11,9 +11,11 @@ All notable changes to this project will be documented in this file.
 ### Security
 -->
 
-##Unreleased
+## Unreleased
 
 ### Added
+
+## [v0.0.2] - 2018-12-04
 
 ### Changed
 
@@ -62,3 +64,4 @@ Types of changes
 
 [#3]: https://github.com/jawira/mini-getop/pull/3
 [v0.0.1]: https://github.com/jawira/mini-getop/compare/v0.0.0...v0.0.1
+[v0.0.2]: https://github.com/jawira/mini-getop/compare/v0.0.1...v0.0.2
