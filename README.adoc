@@ -37,7 +37,7 @@ Imagine you have the following script:
 // Setup
 $getopt = new MiniGetopt();
 $getopt->addRequired('f', 'format', 'File format'); // <1>
-$getopt->addOptional('m', 'message', 'Message'); // <2>
+$getopt->addOptional('r', 'retry', 'Retry when error'); // <2>
 $getopt->addNoValue('h', 'help', 'Show help'); // <3>
 
 // Retrieving values
@@ -56,7 +56,89 @@ var_dump($format, $message, $help);
 
 === Executing the example
 
-// todo: execute demo.php
+*Using script without options*
+
+Command:
+
+[source]
+----
+$ php resources/demo.php
+----
+
+Output:
+
+[source]
+----
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+string(3) "svg"
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+NULL
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+NULL
+----
+
+*Using script with mandatory option*
+
+Command:
+
+[source]
+----
+$ php resources/demo.php -fsvg
+----
+
+Output:
+
+[source]
+----
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+string(3) "png"
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+NULL
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+NULL
+----
+
+*Using script with optional option without value*
+
+Command:
+
+[source]
+----
+$ php resources/demo.php -f=svg --retry
+----
+
+Output:
+
+[source]
+----
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+string(3) "svg"
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+bool(false)
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+NULL
+----
+
+*Using script with all options in long format*
+
+Command:
+
+[source]
+----
+$ php resources/demo.php --format=svg --retry=yes --help
+----
+
+Output:
+
+[source]
+----
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+string(3) "svg"
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+string(3) "yes"
+/home/jawira/Projects/mini-getopt/resources/demo.php:19:
+bool(false)
+----
 
 == How to install
 

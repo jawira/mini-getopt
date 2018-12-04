@@ -7,7 +7,7 @@ use Jawira\MiniGetopt\MiniGetopt;
 // Setup
 $getopt = new MiniGetopt();
 $getopt->addRequired('f', 'format', 'File format'); // <1>
-$getopt->addOptional('m', 'message', 'Message'); // <2>
+$getopt->addOptional('r', 'retry', 'Retry when error'); // <2>
 $getopt->addNoValue('h', 'help', 'Show help'); // <3>
 
 // Retrieving values
