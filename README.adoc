@@ -12,18 +12,18 @@ image:https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square[PDS S
 
 == Usage
 
-This library is composed of only one class : `\Jawira\MiniGetopt\MiniGetopt`.
+This library is composed of one class only: `\Jawira\MiniGetopt\MiniGetopt`.
 
 Since this library is only a wrapper, you should know how `getopt()` function
 works. Please read the documentation: http://php.net/manual/en/function.getopt.php[http://php.net/manual/en/function.getopt.php] 
 
-To setup `MiniGetopt` class you should use one of the following methods:
+To setup `MiniGetopt` class you should use the following methods:
 
 * `MiniGetopt::addNoValue`
 * `MiniGetopt::addOptional`
 * `MiniGetopt::addRequired`
 
-To retrieve the values at execution time use:
+To retrieve the values use:
 
 * `MiniGetopt::getOption`
 
@@ -34,7 +34,19 @@ Imagine you have the following script:
 .resources/demo.php
 [source,php]
 ----
-include::resources/demo.php[lines=7..100]
+// Setup
+$getopt = new MiniGetopt();
+$getopt->addRequired('f', 'format', 'File format'); // <1>
+$getopt->addOptional('m', 'message', 'Message'); // <2>
+$getopt->addNoValue('h', 'help', 'Show help'); // <3>
+
+// Retrieving values
+$format  = $getopt->getOption('f', 'format', 'png'); // <4>
+$message = $getopt->getOption('r', 'retry'); // <5>
+$help    = $getopt->getOption('h', 'help');
+
+// Show retrieved values
+var_dump($format, $message, $help);
 ----
 <1> When used a _required option_ expects to have a value.
 <2> An _optional option_ may or may not have a value.

@@ -12,7 +12,7 @@ $getopt->addNoValue('h', 'help', 'Show help'); // <3>
 
 // Retrieving values
 $format  = $getopt->getOption('f', 'format', 'png'); // <4>
-$message = $getopt->getOption('r', 'retry'); // <5>se
+$message = $getopt->getOption('r', 'retry'); // <5>
 $help    = $getopt->getOption('h', 'help');
 
 // Show retrieved values
