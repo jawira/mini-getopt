@@ -36,9 +36,9 @@ Imagine you have the following script:
 ----
 // Setup
 $getopt = new MiniGetopt();
-$getopt->addRequired('f', 'format', 'File format'); // <1>
-$getopt->addOptional('r', 'retry', 'Retry when error'); // <2>
-$getopt->addNoValue('h', 'help', 'Show help'); // <3>
+$getopt->addRequired('f', 'format'); // <1>
+$getopt->addOptional('r', 'retry'); // <2>
+$getopt->addNoValue('h', 'help'); // <3>
 
 // Retrieving values
 $format  = $getopt->getOption('f', 'format', 'png'); // <4>
@@ -48,7 +48,7 @@ $help    = $getopt->getOption('h', 'help');
 // Show retrieved values
 var_dump($format, $message, $help);
 ----
-<1> When used a _required option_ expects to have a value.
+<1> When used, a _required option_ expects to have a value.
 <2> An _optional option_ may or may not have a value.
 <3> A _no value option_ doesn't needs to have a value.
 <4> _Default value_ (`png`) is used when an option is not used in command line.
