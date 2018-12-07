@@ -17,6 +17,10 @@ All notable changes to this project will be documented in this file.
 
 - [#4] Adding `.gitattributes` file
 
+### Changed
+
+- Minimum version set to php 7.0 in [composer.json]()
+
 ## [v0.0.2] - 2018-12-04
 
 - New informational files created: [CONTRIBUTING.md](), [LICENSE](), [.editorconfig]()
