@@ -13,10 +13,10 @@
     }
   ],
   "require": {
+    "php": "^7.0",
     "ext-mbstring": "*"
   },
-  "require-dev": {
-  },
+  "require-dev": {},
   "suggest": {
     "pds/skeleton": "Standard PHP package skeleton"
   },
