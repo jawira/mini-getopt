@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - [#4] Adding `.gitattributes` file
+- Adding waffle.io badge in [README.adoc]()
 
 ## [v0.0.2] - 2018-12-04
 

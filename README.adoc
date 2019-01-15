@@ -9,6 +9,7 @@ image:https://poser.pugx.org/jawira/mini-getopt/downloads[Total Downloads,link=h
 image:https://poser.pugx.org/jawira/mini-getopt/license[License,link=https://packagist.org/packages/jawira/mini-getopt]
 image:https://poser.pugx.org/jawira/mini-getopt/composerlock[composer.lock,link=https://packagist.org/packages/jawira/mini-getopt]
 image:https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square[PDS Skeleton,link=https://github.com/php-pds/skeleton]
+image:https://badge.waffle.io/jawira/mini-getopt.svg?columns=all[Waffle.io - Columns and their card count,link=https://waffle.io/jawira/mini-getopt]
 
 == Usage
 
