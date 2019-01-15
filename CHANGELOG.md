@@ -18,7 +18,13 @@ All notable changes to this project will be documented in this file.
 - [#4] Adding `.gitattributes` file
 - Adding waffle.io badge in [README.adoc]()
 
+### Changed
+
+- Minimum version set to php 7.0 in [composer.json]()
+
 ## [v0.0.2] - 2018-12-04
+
+- New informational files created: [CONTRIBUTING.md](), [LICENSE](), [.editorconfig]()
 
 ### Changed
 
@@ -33,7 +39,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fixed `\Jawira\MiniGetopt\MiniGetopt::getOption` return type is `mixed`  
-
 
 ## [v0.0.0] - 2018-09-19
 
