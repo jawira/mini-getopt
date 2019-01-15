@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v0.0.3] - 2019-01-15
+
 ### Added
 
 - [#4] Adding `.gitattributes` file
@@ -74,3 +76,4 @@ Types of changes
 [v0.0.1]: https://github.com/jawira/mini-getop/compare/v0.0.0...v0.0.1
 [v0.0.2]: https://github.com/jawira/mini-getop/compare/v0.0.1...v0.0.2
 [#4]: https://github.com/jawira/mini-getop/pull/4
+[v0.0.3]: https://github.com/jawira/mini-getop/compare/v0.0.2...v0.0.3
