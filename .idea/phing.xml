@@ -4,5 +4,6 @@
     <buildFilePaths>
       <buildFile path="file://$PROJECT_DIR$/build.xml" />
     </buildFilePaths>
+    <phingPath>/usr/bin/phing</phingPath>
   </component>
 </project>
