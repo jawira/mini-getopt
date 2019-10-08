@@ -2,6 +2,13 @@
 
 namespace Jawira\MiniGetopt;
 
+/**
+ * Class Value
+ *
+ * @internal
+ * @author  Jawira Portugal <dev@tugal.be>
+ * @package Jawira\MiniGetopt
+ */
 abstract class Value
 {
     const NO_VALUE    = '';
@@ -45,7 +52,8 @@ abstract class Value
      *
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function __construct(?string $shortOption, ?string $longOption, string $description = self::EMPTY, string $placeholder = self::PLACEHOLDER)
+    public function __construct(?string $shortOption, ?string $longOption, string $description = self::EMPTY,
+                                string $placeholder = self::PLACEHOLDER)
     {
         $this->validator = new Validator();
         $this->validator->validateShortAndLong($shortOption, $longOption);
@@ -118,9 +126,6 @@ abstract class Value
             $names[] = "--$longOption";
         }
 
-        return sprintf($this->getDocTemplate(),
-                       implode(', ', $names),
-                       $placeholder,
-                       wordwrap($description, 72, PHP_EOL));
+        return sprintf($this->getDocTemplate(), implode(', ', $names), $placeholder, wordwrap($description, 72, PHP_EOL));
     }
 }

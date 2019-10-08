@@ -8,6 +8,7 @@ use function getopt;
  * Very simple `getopt()` wrapper
  *
  * @see     https://www.php.net/manual/en/function.getopt.php
+ * @author  Jawira Portugal <dev@tugal.be>
  * @package Jawira\MiniGetopt
  */
 class MiniGetopt
@@ -38,7 +39,8 @@ class MiniGetopt
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addRequired(?string $shortOption, ?string $longOption, string $description = Value::EMPTY, string $placeholder = Value::PLACEHOLDER): self
+    public function addRequired(?string $shortOption, ?string $longOption, string $description = Value::EMPTY,
+                                string $placeholder = Value::PLACEHOLDER): self
     {
         $this->options[] = new RequiredValue($shortOption, $longOption, $description, $placeholder);
 
@@ -56,7 +58,8 @@ class MiniGetopt
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addOptional(?string $shortOption, ?string $longOption, string $description = Value::EMPTY, string $placeholder = Value::PLACEHOLDER): self
+    public function addOptional(?string $shortOption, ?string $longOption, string $description = Value::EMPTY,
+                                string $placeholder = Value::PLACEHOLDER): self
     {
         $this->options[] = new OptionalValue($shortOption, $longOption, $description, $placeholder);
 

@@ -2,6 +2,13 @@
 
 namespace Jawira\MiniGetopt;
 
+/**
+ * Class NoValue
+ *
+ * @internal
+ * @author  Jawira Portugal <dev@tugal.be>
+ * @package Jawira\MiniGetopt
+ */
 class NoValue extends Value
 {
     const TEMPLATE = <<<TEMPLATE

@@ -2,6 +2,12 @@
 
 namespace Jawira\MiniGetopt;
 
+/**
+ * Class Validator
+ *
+ * @author  jawira
+ * @package Jawira\MiniGetopt
+ */
 class Validator
 {
 
