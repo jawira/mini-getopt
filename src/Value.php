@@ -11,11 +11,12 @@ namespace Jawira\MiniGetopt;
  */
 abstract class Value
 {
-    const NO_VALUE    = '';
-    const REQUIRED    = ':';
-    const OPTIONAL    = '::';
-    const PLACEHOLDER = 'value';
-    const EMPTY       = '';
+    const NO_VALUE     = '';
+    const REQUIRED     = ':';
+    const OPTIONAL     = '::';
+    const PLACEHOLDER  = 'value';
+    const EMPTY_STRING = '';
+    const EMPTY_ARRAY  = [];
 
     /**
      * @var null|string Shot option string, one character long
@@ -52,11 +53,13 @@ abstract class Value
      *
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function __construct(?string $shortOption, ?string $longOption, string $description = self::EMPTY,
+    public function __construct(string $shortOption, string $longOption, string $description = self::EMPTY_STRING,
                                 string $placeholder = self::PLACEHOLDER)
     {
         $this->validator = new Validator();
-        $this->validator->validateShortAndLong($shortOption, $longOption);
+        if (!$this->validator->isShortOrLong($shortOption, $longOption)) {
+            throw new MiniGetoptException('You should define at least short option or long option');
+        }
         $this->shortOption = $shortOption;
         $this->longOption  = $longOption;
         $this->description = $description;
@@ -71,7 +74,7 @@ abstract class Value
     public function getShortOption(): string
     {
         if (is_null($this->shortOption)) {
-            return self::EMPTY;
+            return self::EMPTY_STRING;
         }
 
         return $this->shortOption . $this->getSeparator();
@@ -85,7 +88,7 @@ abstract class Value
     public function getLongOption(): string
     {
         if (is_null($this->shortOption)) {
-            return self::EMPTY;
+            return self::EMPTY_STRING;
         }
 
         return $this->longOption . $this->getSeparator();
@@ -113,7 +116,7 @@ abstract class Value
 
     public function doc()
     {
-        $names       = [];
+        $names       = Value::EMPTY_ARRAY;
         $shortOption = $this->shortOption;
         $longOption  = $this->longOption;
         $placeholder = $this->getPlaceholder();
@@ -126,6 +129,9 @@ abstract class Value
             $names[] = "--$longOption";
         }
 
-        return sprintf($this->getDocTemplate(), implode(', ', $names), $placeholder, wordwrap($description, 72, PHP_EOL));
+        return sprintf($this->getDocTemplate(),
+                       implode(', ', $names),
+                       $placeholder,
+                       wordwrap($description, 72, PHP_EOL));
     }
 }

@@ -16,7 +16,7 @@ class MiniGetopt
     /**
      * @var \Jawira\MiniGetopt\Value[]
      */
-    protected $options = [];
+    protected $options = Value::EMPTY_ARRAY;
 
     /**
      * @var \Jawira\MiniGetopt\Validator
@@ -39,7 +39,7 @@ class MiniGetopt
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addRequired(?string $shortOption, ?string $longOption, string $description = Value::EMPTY,
+    public function addRequired(?string $shortOption, ?string $longOption, string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
         $this->options[] = new RequiredValue($shortOption, $longOption, $description, $placeholder);
@@ -58,7 +58,7 @@ class MiniGetopt
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addOptional(?string $shortOption, ?string $longOption, string $description = Value::EMPTY,
+    public function addOptional(?string $shortOption, ?string $longOption, string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
         $this->options[] = new OptionalValue($shortOption, $longOption, $description, $placeholder);
@@ -69,14 +69,14 @@ class MiniGetopt
     /**
      * Create an option without value
      *
-     * @param null|string $shortOption
-     * @param null|string $longOption
-     * @param string      $description
+     * @param string $shortOption
+     * @param string $longOption
+     * @param string $description
      *
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addNoValue(?string $shortOption, ?string $longOption, string $description = Value::EMPTY): self
+    public function addNoValue(string $shortOption, string $longOption, string $description = Value::EMPTY_STRING): self
     {
         $this->options[] = new NoValue($shortOption, $longOption, $description);
 
@@ -90,13 +90,13 @@ class MiniGetopt
      */
     public function getopt()
     {
-        $shortOptions = '';
-        $longOptions  = [];
+        $shortOptions = Value::EMPTY_STRING;
+        $longOptions  = Value::EMPTY_ARRAY;
 
         foreach ($this->options as $option) {
             $shortOptions .= $option->getShortOption();
             $long         = $option->getLongOption();
-            if ($long !== Value::EMPTY) {
+            if ($long !== Value::EMPTY_STRING) {
                 $longOptions[] = $long;
             }
         }
@@ -117,21 +117,23 @@ class MiniGetopt
     }
 
     /**
-     * @param string $short
-     * @param string $long
+     * @param string $shortOption
+     * @param string $longOption
      *
-     * @return null|bool|string
+     * @return mixed
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function getOption(?string $short, ?string $long)
+    public function getOption(string $shortOption, string $longOption)
     {
-        $this->validator->validateShortAndLong($short, $long);
-        $getopt = $this->getopt();
-        if (array_key_exists($short, $getopt)) {
-            return $getopt[$short];
+        if (!$this->validator->isShortOrLong($shortOption, $longOption)) {
+            throw new MiniGetoptException('You should define at least short option or long option');
         }
-        if (array_key_exists($long, $getopt)) {
-            return $getopt[$long];
+        $getopt = $this->getopt();
+        if (array_key_exists($shortOption, $getopt)) {
+            return $getopt[$shortOption];
+        }
+        if (array_key_exists($longOption, $getopt)) {
+            return $getopt[$longOption];
         }
 
         return null;
