@@ -1,7 +1,5 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
 <!--
 ### Added
 ### Changed
@@ -12,6 +10,16 @@ All notable changes to this project will be documented in this file.
 -->
 
 ## Unreleased
+
+## [v1.0.0] - 2019-10-10
+
+### Changed
+
+- [#6] Making public \Jawira\MiniGetopt\MiniGetopt::getopt
+
+### Removed
+
+- [#1] The third parameter from \Jawira\MiniGetopt\MiniGetopt::getOption has been removed
 
 ## [v0.0.3] - 2019-01-15
 
@@ -49,31 +57,11 @@ All notable changes to this project will be documented in this file.
 - Added `\Jawira\MiniGetopt\MiniGetopt` class
 - Autoloading `Jawira\MiniGetopt` in `composer.json`
 
-
-
-<!---
-Guiding Principles
-
-    Changelogs are for humans, not machines.
-    There should be an entry for every single version.
-    The same types of changes should be grouped.
-    Versions and sections should be linkable.
-    The latest version comes first.
-    The release date of each versions is displayed.
-    Mention whether you follow Semantic Versioning.
-
-Types of changes
-
-    ### Added       for new features.
-    ### Changed     for changes in existing functionality.
-    ### Deprecated  for soon-to-be removed features.
-    ### Removed     for now removed features.
-    ### Fixed       for any bug fixes.
-    ### Security    in case of vulnerabilities.
--->
-
 [#3]: https://github.com/jawira/mini-getop/pull/3
 [v0.0.1]: https://github.com/jawira/mini-getop/compare/v0.0.0...v0.0.1
 [v0.0.2]: https://github.com/jawira/mini-getop/compare/v0.0.1...v0.0.2
 [#4]: https://github.com/jawira/mini-getop/pull/4
 [v0.0.3]: https://github.com/jawira/mini-getop/compare/v0.0.2...v0.0.3
+[#1]: https://github.com/jawira/mini-getop/pull/1
+[#6]: https://github.com/jawira/mini-getop/pull/6
+[v1.0.0]: https://github.com/jawira/mini-getop/compare/v0.0.3...v1.0.0

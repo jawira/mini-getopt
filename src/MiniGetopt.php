@@ -2,210 +2,140 @@
 
 namespace Jawira\MiniGetopt;
 
+use function getopt;
+
 /**
- * Very simple getopt() wrapper
+ * Very simple `getopt()` wrapper
  *
+ * @see     https://www.php.net/manual/en/function.getopt.php
+ * @author  Jawira Portugal <dev@tugal.be>
  * @package Jawira\MiniGetopt
  */
 class MiniGetopt
 {
-    const NO_VALUE = '';
-    const REQUIRED = ':';
-    const OPTIONAL = '::';
-
-    protected $options = [];
+    /**
+     * @var \Jawira\MiniGetopt\Value[]
+     */
+    protected $options = Value::EMPTY_ARRAY;
 
     /**
-     * @param string $short
-     * @param string $long
-     * @param string $description
-     * @param string $placeholder
+     * @var \Jawira\MiniGetopt\Validator
+     */
+    protected $validator;
+
+    public function __construct()
+    {
+        $this->validator = new Validator();
+    }
+
+    /**
+     * Create an option with required value
+     *
+     * @param null|string $shortOption
+     * @param null|string $longOption
+     * @param string      $description
+     * @param string      $placeholder
      *
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addRequired(string $short, string $long, string $description = '', string $placeholder = 'value')
+    public function addRequired(?string $shortOption, ?string $longOption, string $description = Value::EMPTY_STRING,
+                                string $placeholder = Value::PLACEHOLDER): self
     {
-        $this->addOption(self::REQUIRED, $short, $long, $description, $placeholder);
+        $this->options[] = new RequiredValue($shortOption, $longOption, $description, $placeholder);
+
         return $this;
     }
 
     /**
-     * @param string $short
-     * @param string $long
-     * @param string $description
-     * @param string $placeholder
+     * Create an option with optional value
+     *
+     * @param null|string $shortOption
+     * @param null|string $longOption
+     * @param string      $description
+     * @param string      $placeholder
      *
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addOptional(string $short, string $long, string $description = '', string $placeholder = 'value')
+    public function addOptional(?string $shortOption, ?string $longOption, string $description = Value::EMPTY_STRING,
+                                string $placeholder = Value::PLACEHOLDER): self
     {
-        $this->addOption(self::OPTIONAL, $short, $long, $description, $placeholder);
+        $this->options[] = new OptionalValue($shortOption, $longOption, $description, $placeholder);
+
         return $this;
     }
 
     /**
-     * @param string $short
-     * @param string $long
+     * Create an option without value
+     *
+     * @param string $shortOption
+     * @param string $longOption
      * @param string $description
      *
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addNoValue(string $short, string $long, string $description = '')
+    public function addNoValue(string $shortOption, string $longOption, string $description = Value::EMPTY_STRING): self
     {
-        $this->addOption(self::NO_VALUE, $short, $long, $description, '');
+        $this->options[] = new NoValue($shortOption, $longOption, $description);
+
         return $this;
     }
 
     /**
-     * @param string $type
-     * @param string $short
-     * @param string $long
-     * @param string $description
-     * @param string $placeholder
+     * Calls `getopt()` function
      *
-     * @return $this
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @return array
      */
-    protected function addOption(string $type, string $short, string $long, string $description, string $placeholder)
+    public function getopt()
     {
-        $this->validateShortAndLong($short, $long);
-
-        $this->options[] = compact('type', 'short', 'long', 'description', 'placeholder');
-        return $this;
-    }
-
-    protected function validShort(string $short)
-    {
-        return \mb_strlen($short) <= 1;
-    }
-
-    protected function validLong(string $long)
-    {
-        return \mb_strlen($long) !== 1;
-    }
-
-    protected function noEmptyString(string $string)
-    {
-        return \mb_strlen($string) > 0;
-    }
-
-    protected function emptyString(string $string)
-    {
-        return !$this->noEmptyString($string);
-    }
-
-    protected function getopt()
-    {
-        $shortOptions = '';
-        $longOptions  = [];
+        $shortOptions = Value::EMPTY_STRING;
+        $longOptions  = Value::EMPTY_ARRAY;
 
         foreach ($this->options as $option) {
-            /**
-             * @var string $type
-             * @var string $short
-             * @var string $long
-             * @var string $description
-             * @var string $placeholder
-             */
-            extract($option, EXTR_OVERWRITE);
-            if ($this->noEmptyString($short)) {
-                $shortOptions .= $short . $type;
-            }
-            if ($this->noEmptyString($long)) {
-                $longOptions[] = $long . $type;
+            $shortOptions .= $option->getShortOption();
+            $long         = $option->getLongOption();
+            if ($long !== Value::EMPTY_STRING) {
+                $longOptions[] = $long;
             }
         }
 
-        return \getopt($shortOptions, $longOptions);
+        return getopt($shortOptions, $longOptions);
     }
 
+    /** @noinspection PhpUnused */
     public function doc()
     {
-        $doc = 'OPTIONS' . PHP_EOL;
+        $doc = 'OPTIONS' . PHP_EOL . PHP_EOL;
 
         foreach ($this->options as $option) {
-            /**
-             * @var string $type
-             * @var string $short
-             * @var string $long
-             * @var string $description
-             * @var string $placeholder
-             */
-            extract($option, EXTR_OVERWRITE);
-            $names = [];
-            if ($this->noEmptyString($short)) {
-                $names[] = "-$short";
-            }
-            if ($this->noEmptyString($long)) {
-                $names[] = "--$long";
-            }
-            $summary = implode(', ', $names);
-            if ($this->noEmptyString($placeholder)) {
-                switch ($type) {
-                    case self::REQUIRED:
-                        $summary .= " <$placeholder>";
-                        break;
-                    case self::OPTIONAL:
-                        $summary .= " [$placeholder]";
-                        break;
-                }
-            }
-
-            $doc .= $summary . PHP_EOL;
-
-            if ($this->noEmptyString($description)) {
-                $doc .= wordwrap($description, 72, PHP_EOL) . PHP_EOL;
-            }
-
-            $doc .= PHP_EOL;
+            $doc .= $option->doc() . PHP_EOL;
         }
 
         return $doc;
     }
 
     /**
-     * @param string $short
-     * @param string $long
-     * @param null   $default
+     * @param string $shortOption
+     * @param string $longOption
      *
      * @return mixed
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function getOption(string $short, string $long, $default = null)
+    public function getOption(string $shortOption, string $longOption)
     {
-        $this->validateShortAndLong($short, $long);
+        if (!$this->validator->isShortOrLong($shortOption, $longOption)) {
+            throw new MiniGetoptException('You should define at least short option or long option');
+        }
         $getopt = $this->getopt();
-        if (array_key_exists($short, $getopt)) {
-            return $getopt[$short];
+        if (array_key_exists($shortOption, $getopt)) {
+            return $getopt[$shortOption];
         }
-        if (array_key_exists($long, $getopt)) {
-            return $getopt[$long];
+        if (array_key_exists($longOption, $getopt)) {
+            return $getopt[$longOption];
         }
 
-        return $default;
-    }
-
-    /**
-     * @param string $short
-     * @param string $long
-     *
-     * @return \Jawira\MiniGetopt\MiniGetopt
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
-     */
-    protected function validateShortAndLong(string $short, string $long): self
-    {
-        if (!$this->validShort($short)) {
-            throw new MiniGetoptException("Short option '$short' should be one character long");
-        }
-        if (!$this->validLong($long)) {
-            throw new MiniGetoptException("Long option '$long' should be at least two characters long");
-        }
-        if ($this->emptyString($short) && $this->emptyString($long)) {
-            throw new MiniGetoptException("You should define at least short option or long option");
-        }
-        return $this;
+        return null;
     }
 }
