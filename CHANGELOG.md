@@ -11,9 +11,11 @@
 
 ## Unreleased
 
-### Added
+## [v1.0.0] - 2019-10-10
 
-- [#1] \Jawira\MiniGetopt\MiniGetopt::getopt
+### Changed
+
+- [#6] Making public \Jawira\MiniGetopt\MiniGetopt::getopt
 
 ### Removed
 
@@ -61,3 +63,5 @@
 [#4]: https://github.com/jawira/mini-getop/pull/4
 [v0.0.3]: https://github.com/jawira/mini-getop/compare/v0.0.2...v0.0.3
 [#1]: https://github.com/jawira/mini-getop/pull/1
+[#6]: https://github.com/jawira/mini-getop/pull/6
+[v1.0.0]: https://github.com/jawira/mini-getop/compare/v0.0.3...v1.0.0
