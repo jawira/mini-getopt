@@ -18,7 +18,8 @@
   },
   "require-dev": {},
   "suggest": {
-    "pds/skeleton": "Standard PHP package skeleton"
+    "pds/skeleton": "Standard PHP package skeleton",
+    "phing/phing": "PHP Build Tool"
   },
   "autoload": {
     "psr-4": {
