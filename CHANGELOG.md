@@ -11,6 +11,10 @@
 
 ## Unreleased
 
+### Added
+
+- [#2] Added behat tests
+
 ## [v1.0.0] - 2019-10-10
 
 ### Changed
@@ -65,3 +69,4 @@
 [#1]: https://github.com/jawira/mini-getop/pull/1
 [#6]: https://github.com/jawira/mini-getop/pull/6
 [v1.0.0]: https://github.com/jawira/mini-getop/compare/v0.0.3...v1.0.0
+[#2]: https://github.com/jawira/mini-getop/pull/2
