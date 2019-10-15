@@ -14,8 +14,7 @@
   ],
   "require": {
     "php": "^7.1",
-    "ext-mbstring": "*",
-    "jawira/skeleton": "^1.12"
+    "ext-mbstring": "*"
   },
   "require-dev": {},
   "suggest": {
