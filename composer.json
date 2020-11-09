@@ -19,7 +19,9 @@
     "php": ">=7.1",
     "ext-mbstring": "*"
   },
-  "require-dev": {},
+  "require-dev": {
+    "behat/behat": "^3.8"
+  },
   "suggest": {
     "pds/skeleton": "Standard PHP package skeleton",
     "phing/phing": "PHP Build Tool"
