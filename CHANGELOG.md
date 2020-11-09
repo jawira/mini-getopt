@@ -11,8 +11,11 @@
 
 ## Unreleased
 
-### Added
+## v1.1.0 - 2020-11-9
 
+- #8 PHP8 compatibility
+- #8 Remove jawira/skeleton
+- #9 Add optind parameter
 - [#2] Added behat tests
 
 ## [v1.0.0] - 2019-10-10
