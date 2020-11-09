@@ -3,7 +3,10 @@
   "type": "library",
   "description": "Very simple wrapper for getopt() function",
   "keywords": [
-    "getopt"
+    "getopt",
+    "cli",
+    "option",
+    "terminal"
   ],
   "license": "MIT",
   "authors": [
@@ -13,11 +16,12 @@
     }
   ],
   "require": {
-    "php": "^7.1",
-    "ext-mbstring": "*",
-    "jawira/skeleton": "^1.12"
+    "php": ">=7.1",
+    "ext-mbstring": "*"
   },
-  "require-dev": {},
+  "require-dev": {
+    "jawira/skeleton": "^1.15"
+  },
   "suggest": {
     "pds/skeleton": "Standard PHP package skeleton"
   },
