@@ -19,9 +19,7 @@
     "php": ">=7.1",
     "ext-mbstring": "*"
   },
-  "require-dev": {
-    "jawira/skeleton": "^1.15"
-  },
+  "require-dev": {},
   "suggest": {
     "pds/skeleton": "Standard PHP package skeleton"
   },
