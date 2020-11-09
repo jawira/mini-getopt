@@ -13,4 +13,6 @@ $mg->addNoValue('v', 'verbose', 'Display verbose messages');
 $mg->addNoValue('', 'version', 'Show version');
 
 // Calling getopt function
-echo var_export($mg->getopt(), true) . PHP_EOL;
+$optind = null;
+echo var_export($mg->getopt($optind), true) . PHP_EOL;
+echo "optind: $optind" . PHP_EOL;

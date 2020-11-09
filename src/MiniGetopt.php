@@ -86,9 +86,10 @@ class MiniGetopt
     /**
      * Calls `getopt()` function
      *
+     * @param mixed $optind The index where argument parsing stopped will be written to this variable.
      * @return array
      */
-    public function getopt()
+    public function getopt(&$optind = null)
     {
         $shortOptions = Value::EMPTY_STRING;
         $longOptions  = Value::EMPTY_ARRAY;
@@ -101,7 +102,7 @@ class MiniGetopt
             }
         }
 
-        return getopt($shortOptions, $longOptions);
+        return getopt($shortOptions, $longOptions, $optind);
     }
 
     /** @noinspection PhpUnused */

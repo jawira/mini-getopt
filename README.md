@@ -20,17 +20,20 @@ Usage
 This is only a wrapper, therefore the output from `mini-getopt` is going to be 
 the same as `getopt()` function.
 
-1. First you have to configure options you want to use. To do so use the 
+1. First you have to instantiate `\Jawira\MiniGetopt\MiniGetopt`. 
+Optionally you pass the `$optind` variable to constructor.
+
+2. Then you have to configure options you want to use. To do so use the 
 following methods:
 
-    - `\Jawira\MiniGetopt\MiniGetopt::addRequired`
-    - `\Jawira\MiniGetopt\MiniGetopt::addOptional`
-    - `\Jawira\MiniGetopt\MiniGetopt::addNoValue`
+    - `MiniGetopt::addRequired`
+    - `MiniGetopt::addOptional`
+    - `MiniGetopt::addNoValue`
 
-2. To retrieve values you have to call one of the following method:
+3. To retrieve values you have to call one of the following method:
 
-    - `\Jawira\MiniGetopt\MiniGetopt::getopt` returns the same as `getopt()`
-    - `\Jawira\MiniGetopt\MiniGetopt::getOption` to get only one value
+    - `MiniGetopt::getopt` returns the same as `getopt()`
+    - `MiniGetopt::getOption` to get only one value
 
 Examples
 --------
@@ -52,14 +55,14 @@ var_export($mg->getopt());
 
 Executing code:
 
-```php
+```console
 $ php resources/example.php
 
 array (
 )
 ```
 
-```php
+```console
 $ php resources/example.php -f=xml
 
 array (
@@ -67,7 +70,7 @@ array (
 )
 ```
 
-```php
+```console
 $ php resources/example.php --format=xml -r -v
 
 array (
@@ -77,7 +80,7 @@ array (
 )
 ```
 
-```php
+```console
 $ php resources/example.php -f=json -r=yes -v
 
 array (
@@ -87,7 +90,7 @@ array (
 )
 ```
 
-```php
+```console
 $ php resources/example.php --retry -vvv
 
 array (
@@ -101,13 +104,50 @@ array (
 )
 ```
 
-```php
+```console
 $ php resources/example.php --version=banana --invalid
 
 array (
   'version' => false,
 )
 ```
+
+Example `optind` parameter
+--------------------------
+
+```php
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Jawira\MiniGetopt\MiniGetopt;
+
+// Setup
+$mg = new MiniGetopt();
+$mg->addRequired('f', 'format', 'Format to export', 'png|gif|svg');
+$mg->addNoValue('v', 'verbose', 'Display verbose messages');
+
+// Calling getopt function wit optind parameter
+$optind = null;
+echo var_export($mg->getopt($optind), true) . PHP_EOL;
+echo "optind: $optind" . PHP_EOL;
+```
+
+Executing:
+
+```console
+$ php resources/example.php --format=pdf -vv
+array (
+  'format' => 'pdf',
+  'v' => 
+  array (
+    0 => false,
+    1 => false,
+  ),
+)
+optind: 3
+```
+
 
 How to install
 --------------
