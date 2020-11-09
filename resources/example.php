@@ -16,3 +16,5 @@ $mg->addNoValue('', 'version', 'Show version');
 $optind = null;
 echo var_export($mg->getopt($optind), true) . PHP_EOL;
 echo "optind: $optind" . PHP_EOL;
+
+echo $mg->doc();

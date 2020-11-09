@@ -21,26 +21,27 @@ This is only a wrapper, therefore the output from `mini-getopt` is going to be
 the same as `getopt()` function.
 
 1. First you have to instantiate `\Jawira\MiniGetopt\MiniGetopt`. 
-Optionally you pass the `$optind` variable to constructor.
 
 2. Then you have to configure options you want to use. To do so use the 
 following methods:
 
-    - `MiniGetopt::addRequired`
-    - `MiniGetopt::addOptional`
-    - `MiniGetopt::addNoValue`
+    - `MiniGetopt::addRequired`.
+    - `MiniGetopt::addOptional`.
+    - `MiniGetopt::addNoValue`.
 
 3. To retrieve values you have to call one of the following method:
 
-    - `MiniGetopt::getopt` returns the same as `getopt()`
-    - `MiniGetopt::getOption` to get only one value
+    - `MiniGetopt::getopt` returns the same as `getopt()`. Optionally you  can pass `$optind` parameter.
+    - `MiniGetopt::getOption` to get only one value.
+    - `MiniGetopt::doc` get documentation.
 
-Examples
---------
+Basic usage
+-----------
 
 PHP code:
 
 ```php
+// example.php
 // Preparing options
 $mg = new \Jawira\MiniGetopt\MiniGetopt();
 $mg->addRequired('f', 'format');    // value is required
@@ -112,40 +113,59 @@ array (
 )
 ```
 
-Example `optind` parameter
---------------------------
+`optind` parameter
+------------------
 
 ```php
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-
-require __DIR__ . '/../vendor/autoload.php';
-
-use Jawira\MiniGetopt\MiniGetopt;
-
+// example.php
 // Setup
-$mg = new MiniGetopt();
-$mg->addRequired('f', 'format', 'Format to export', 'png|gif|svg');
-$mg->addNoValue('v', 'verbose', 'Display verbose messages');
+$mg = new \Jawira\MiniGetopt\MiniGetopt();
+$mg->addRequired('f', 'format');
+$mg->addNoValue('v', 'verbose');
 
-// Calling getopt function wit optind parameter
+// Calling getopt function with `optind` parameter
 $optind = null;
-echo var_export($mg->getopt($optind), true) . PHP_EOL;
 echo "optind: $optind" . PHP_EOL;
 ```
 
-Executing:
-
 ```console
 $ php resources/example.php --format=pdf -vv
-array (
-  'format' => 'pdf',
-  'v' => 
-  array (
-    0 => false,
-    1 => false,
-  ),
-)
 optind: 3
+```
+
+Generate doc
+------------
+
+```php
+// example.php
+$mg = new \Jawira\MiniGetopt\MiniGetopt();
+$mg->addRequired('f', 'format', 'Format to export', 'png|gif|svg');
+$mg->addOptional('r', 'retry', 'Retry on error', 'count');
+$mg->addOptional('q', '', 'Quiet mode', 'yes|no');
+$mg->addNoValue('v', 'verbose', 'Display verbose messages');
+$mg->addNoValue('', 'version', 'Show version');
+echo $mg->doc();
+```
+
+```console
+$ php resource/example.php
+OPTIONS
+
+-f, --format=<png|gif|svg>
+Format to export
+
+-r, --retry=[count]
+Retry on error
+
+-q=[yes|no]
+Quiet mode
+
+-v, --verbose
+Display verbose messages
+
+--version
+Show version
+
 ```
 
 
