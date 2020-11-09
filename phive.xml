@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<phive xmlns="https://phar.io/phive">
-  <configuration>
-    <targetDirectory>bin</targetDirectory>
-  </configuration>
-  <phar name="behat/behat" version="^3.3.0" installed="3.3.0" location="./bin/behat.phar" copy="false"/>
-</phive>

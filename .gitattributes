@@ -1,6 +1,8 @@
-/resources      export-ignore
-/CHANGELOG.md   export-ignore
+/.idea/         export-ignore
+/features/      export-ignore
+/resources/     export-ignore
+/.editorconfig  export-ignore
 /.gitattributes export-ignore
 /.gitignore     export-ignore
-/.idea          export-ignore
+/CHANGELOG.md   export-ignore
 /README.adoc    export-ignore

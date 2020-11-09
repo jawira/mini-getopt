@@ -41,7 +41,7 @@ Basic usage
 PHP code:
 
 ```php
-// example.php
+// resources/example.php
 // Preparing options
 $mg = new \Jawira\MiniGetopt\MiniGetopt();
 $mg->addRequired('f', 'format');    // value is required
@@ -117,7 +117,6 @@ array (
 ------------------
 
 ```php
-// example.php
 // Setup
 $mg = new \Jawira\MiniGetopt\MiniGetopt();
 $mg->addRequired('f', 'format');
@@ -137,7 +136,6 @@ Generate doc
 ------------
 
 ```php
-// example.php
 $mg = new \Jawira\MiniGetopt\MiniGetopt();
 $mg->addRequired('f', 'format', 'Format to export', 'png|gif|svg');
 $mg->addOptional('r', 'retry', 'Retry on error', 'count');
