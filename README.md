@@ -3,16 +3,10 @@ Mini Getopt (a getopt wrapper)
 
 Very simple wrapper for `getopt()` function.
 
-[![Latest Stable Version](https://poser.pugx.org/jawira/mini-getopt/v/stable)](https://packagist.org/packages/jawira/mini-getopt)
-[![Total Downloads](https://poser.pugx.org/jawira/mini-getopt/downloads)](https://packagist.org/packages/jawira/mini-getopt)
-[![Monthly Downloads](https://poser.pugx.org/jawira/mini-getopt/d/monthly)](https://packagist.org/packages/jawira/mini-getopt)
-[![License](https://poser.pugx.org/jawira/mini-getopt/license)](https://packagist.org/packages/jawira/mini-getopt)
-[![composer.lock](https://poser.pugx.org/jawira/mini-getopt/composerlock)](https://packagist.org/packages/jawira/mini-getopt)
-[![PHPPackages Referenced By](http://phppackages.org/p/jawira/mini-getopt/badge/referenced-by.svg)](http://phppackages.org/p/jawira/mini-getopt)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jawira/mini-getopt.svg)](http://isitmaintained.com/project/jawira/mini-getopt "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/jawira/mini-getopt.svg)](http://isitmaintained.com/project/jawira/mini-getopt "Percentage of issues still open")
-[![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square)](https://github.com/php-pds/skeleton)
-[![Issues](https://img.shields.io/github/issues/jawira/mini-getopt.svg?label=HuBoard&color=694DC2)](https://huboard.com/jawira/mini-getopt)
+[![Latest Stable Version](https://poser.pugx.org/jawira/mini-getopt/v)](//packagist.org/packages/jawira/mini-getopt)
+[![composer.lock](https://poser.pugx.org/jawira/mini-getopt/composerlock)](//packagist.org/packages/jawira/mini-getopt)
+[![.gitattributes](https://poser.pugx.org/jawira/mini-getopt/gitattributes)](//packagist.org/packages/jawira/mini-getopt)
+[![License](https://poser.pugx.org/jawira/mini-getopt/license)](//packagist.org/packages/jawira/mini-getopt)
 
 Usage
 -----
@@ -124,6 +118,7 @@ $mg->addNoValue('v', 'verbose');
 
 // Calling getopt function with `optind` parameter
 $optind = null;
+$options = $mg->getopt($optind);
 echo "optind: $optind" . PHP_EOL;
 ```
 
