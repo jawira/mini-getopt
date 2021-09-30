@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Jawira\MiniGetopt;
 
@@ -11,11 +11,7 @@ namespace Jawira\MiniGetopt;
  */
 class NoValue extends Value
 {
-    const TEMPLATE = <<<TEMPLATE
-%s%s
-%s
-
-TEMPLATE;
+    const TEMPLATE = '%s%s';
 
     public function __construct(string $shortOption, string $longOption, string $description = self::EMPTY_STRING)
     {

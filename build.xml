@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="jawira/mini-getopt" description="getopt wrapper" default="help">
+
+  <property name="composer.flag" value="--dev"/>
+
+  <target name="setup" depends="composer:install"/>
+  <target name="qa" depends="composer:normalize,composer:validate,behat:run,phpstan:analyze"/>
+
+  <target name="composer:install" description="PHP dependencies">
+    <!-- Use &#45;&#45;no-dev for prod -->
+    <composer command="install">
+      <arg value="--no-interaction"/>
+      <arg value="--prefer-dist"/>
+      <arg value="--no-progress"/>
+      <arg value="--ansi"/>
+      <arg value="${composer.flag}"/>
+    </composer>
+  </target>
+
+  <target name="composer:validate" description="Validate composer.json">
+    <composer command="validate">
+      <arg value="--ansi"/>
+    </composer>
+  </target>
+
+  <target name="composer:normalize" description="Normalize composer.json">
+    <composer command="normalize">
+      <arg value="--ansi"/>
+      <arg value="--diff"/>
+      <arg value="--indent-size=2"/>
+      <arg value="--indent-style=space"/>
+    </composer>
+  </target>
+
+  <target name="behat:run" description="Run behat tests">
+    <exec executable="vendor/bin/behat" passthru="true" checkreturn="true"/>
+  </target>
+
+  <target name="phpstan:analyze" description="Static analysis">
+    <exec executable="vendor/bin/phpstan" passthru="true" checkreturn="true">
+      <arg value="analyze"/>
+      <arg value="--ansi"/>
+      <arg value="--no-interaction"/>
+      <arg value="--no-progress"/>
+      <arg line="--level=max"/>
+      <arg path="src"/>
+    </exec>
+  </target>
+
+  <target name="help">
+    <uptodate property="uptodate.visualizer" srcfile="build.xml" targetfile="build.svg"/>
+    <runtarget target="visualizer"/>
+    <open path="build.svg"/>
+  </target>
+
+  <target name="visualizer" unless="uptodate.visualizer" description="Create buildfile map">
+    <visualizer format="svg"/>
+  </target>
+
+</project>

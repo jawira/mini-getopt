@@ -1,6 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Jawira\MiniGetopt;
+
+use function implode;
+use function sprintf;
 
 /**
  * Class Value
@@ -19,12 +22,12 @@ abstract class Value
     const EMPTY_ARRAY  = [];
 
     /**
-     * @var null|string Shot option string, one character long
+     * @var string Shot option string, one character long
      */
     protected $shortOption;
 
     /**
-     * @var null|string Long option string, at least two characters
+     * @var string Long option string, at least two characters
      */
     protected $longOption;
 
@@ -46,15 +49,15 @@ abstract class Value
     /**
      * Option constructor.
      *
-     * @param null|string $shortOption
-     * @param null|string $longOption
-     * @param string      $description
-     * @param string      $placeholder
+     * @param string $shortOption One letter
+     * @param string $longOption  One word
+     * @param string $description Option description
+     * @param string $placeholder Placeholder for value in doc
      *
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function __construct(string $shortOption, string $longOption, string $description = self::EMPTY_STRING,
-                                string $placeholder = self::PLACEHOLDER)
+    public function __construct(string $shortOption = self::EMPTY_STRING, string $longOption = self::EMPTY_STRING,
+                                string $description = self::EMPTY_STRING, string $placeholder = self::PLACEHOLDER)
     {
         $this->validator = new Validator();
         if (!$this->validator->isShortOrLong($shortOption, $longOption)) {
@@ -73,10 +76,6 @@ abstract class Value
      */
     public function getShortOption(): string
     {
-        if (is_null($this->shortOption)) {
-            return self::EMPTY_STRING;
-        }
-
         return $this->shortOption . $this->getSeparator();
     }
 
@@ -87,10 +86,6 @@ abstract class Value
      */
     public function getLongOption(): string
     {
-        if (is_null($this->shortOption)) {
-            return self::EMPTY_STRING;
-        }
-
         return $this->longOption . $this->getSeparator();
     }
 
@@ -102,25 +97,15 @@ abstract class Value
         return $this->description;
     }
 
-    /**
-     * @return string
-     */
-    public function getPlaceholder(): string
-    {
-        return $this->placeholder;
-    }
-
     abstract protected function getSeparator(): string;
 
     abstract protected function getDocTemplate(): string;
 
-    public function doc()
+    public function getDocNames(): string
     {
         $names       = Value::EMPTY_ARRAY;
         $shortOption = $this->shortOption;
         $longOption  = $this->longOption;
-        $placeholder = $this->getPlaceholder();
-        $description = $this->getDescription();
 
         if ($this->validator->isNotEmptyString($shortOption)) {
             $names[] = "-$shortOption";
@@ -129,9 +114,7 @@ abstract class Value
             $names[] = "--$longOption";
         }
 
-        return sprintf($this->getDocTemplate(),
-                       implode(', ', $names),
-                       $placeholder,
-                       wordwrap($description, 72, PHP_EOL));
+        // @phpstan-ignore-next-line
+        return sprintf(static::TEMPLATE, implode(' ', $names), $this->placeholder);
     }
 }

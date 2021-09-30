@@ -6,3 +6,5 @@
 /.gitignore     export-ignore
 /CHANGELOG.md   export-ignore
 /README.adoc    export-ignore
+/build.svg      export-ignore
+/build.xml      export-ignore
