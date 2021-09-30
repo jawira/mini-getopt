@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="190px" preserveAspectRatio="none" style="width:522px;height:190px;background:#FFFFFF;" version="1.1" viewBox="0 0 522 190" width="522px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="170" x="169.5697" y="16.708">jawira/mini-getopt</text><ellipse cx="457.1191" cy="46.4791" fill="#FFFECC" rx="34.1191" ry="14.526" style="stroke:#333333;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="440.6725" y="49.4912">help</text><ellipse cx="456.8197" cy="163.7202" fill="#FFFECC" rx="59.3197" ry="14.7671" style="stroke:#333333;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="420.8197" y="167.4678">visualizer</text><ellipse cx="99.1107" cy="46.4753" fill="#FFFECC" rx="80.6107" ry="18.5221" style="stroke:#333333;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="37.6726" y="49.7879">composer:install</text><ellipse cx="301.0998" cy="46.6731" fill="#FFFECC" rx="86.5998" ry="19.72" style="stroke:#333333;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="234.0998" y="49.5198">composer:validate</text><ellipse cx="98.7771" cy="163.9085" fill="#FFFECC" rx="92.7771" ry="20.9554" style="stroke:#333333;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="24.7771" y="166.7552">composer:normalize</text><!--MD5=[9f3237f55493a0d177cfac72db78ff2c]
+link help to visualizer--><path d="M457,61.1561 C457,81.7111 457,120.5951 457,143.9017 " fill="none" id="help-to-visualizer" style="stroke:#D41159;stroke-width:2.0;"/><polygon fill="#D41159" points="457,148.9078,461,139.9078,457,143.9078,453,139.9078,457,148.9078" style="stroke:#D41159;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="34" x="458" y="109.02">call:1</text><!--MD5=[824966712e75e3e0acdf5c47b18cc416]
+link composer:install to composer:validate--><!--MD5=[8927263288e82328fa8a01f81265169b]
+link composer:install to composer:normalize--><!--MD5=[a823ec51414f96f6e65ab177280bef3d]
+@startuml
+title
+jawira/mini-getopt
+end title
+
+top to bottom direction
+
+skinparam Shadowing false
+skinparam ArrowFontColor Black
+skinparam ArrowThickness 2
+skinparam UseCaseBackgroundColor #FFFECC
+skinparam UseCaseBorderColor #333333
+skinparam UseCaseBorderThickness 2
+skinparam UseCaseFontColor Black
+
+
+(help) -[#D41159]-> (visualizer) : call:1
+(composer:install)
+(composer:validate)
+(composer:normalize)
+(help)
+(visualizer)
+@enduml
+
+PlantUML version 1.2021.11beta7(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

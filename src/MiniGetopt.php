@@ -1,8 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Jawira\MiniGetopt;
 
+use function array_reduce;
 use function getopt;
+use function is_array;
+use function max;
+use function mb_strlen;
+use function str_pad;
+use const PHP_EOL;
 
 /**
  * Very simple `getopt()` wrapper
@@ -13,14 +19,10 @@ use function getopt;
  */
 class MiniGetopt
 {
-    /**
-     * @var \Jawira\MiniGetopt\Value[]
-     */
+    /** @var \Jawira\MiniGetopt\Value[] */
     protected $options = Value::EMPTY_ARRAY;
 
-    /**
-     * @var \Jawira\MiniGetopt\Validator
-     */
+    /** @var \Jawira\MiniGetopt\Validator */
     protected $validator;
 
     public function __construct()
@@ -31,15 +33,17 @@ class MiniGetopt
     /**
      * Create an option with required value
      *
-     * @param null|string $shortOption
-     * @param null|string $longOption
+     * @param string $shortOption
+     * @param string $longOption
      * @param string      $description
      * @param string      $placeholder
      *
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addRequired(?string $shortOption, ?string $longOption, string $description = Value::EMPTY_STRING,
+    public function addRequired(string $shortOption = Value::EMPTY_STRING,
+                                string $longOption = Value::EMPTY_STRING,
+                                string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
         $this->options[] = new RequiredValue($shortOption, $longOption, $description, $placeholder);
@@ -50,15 +54,17 @@ class MiniGetopt
     /**
      * Create an option with optional value
      *
-     * @param null|string $shortOption
-     * @param null|string $longOption
-     * @param string      $description
-     * @param string      $placeholder
+     * @param string $shortOption
+     * @param string $longOption
+     * @param string $description
+     * @param string $placeholder
      *
-     * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @return \Jawira\MiniGetopt\MiniGetopt
      */
-    public function addOptional(?string $shortOption, ?string $longOption, string $description = Value::EMPTY_STRING,
+    public function addOptional(string $shortOption = Value::EMPTY_STRING,
+                                string $longOption = Value::EMPTY_STRING,
+                                string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
         $this->options[] = new OptionalValue($shortOption, $longOption, $description, $placeholder);
@@ -76,7 +82,9 @@ class MiniGetopt
      * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addNoValue(string $shortOption, string $longOption, string $description = Value::EMPTY_STRING): self
+    public function addNoValue(string $shortOption = Value::EMPTY_STRING,
+                               string $longOption = Value::EMPTY_STRING,
+                               string $description = Value::EMPTY_STRING): self
     {
         $this->options[] = new NoValue($shortOption, $longOption, $description);
 
@@ -87,9 +95,11 @@ class MiniGetopt
      * Calls `getopt()` function
      *
      * @param mixed $optind The index where argument parsing stopped will be written to this variable.
-     * @return array
+     *
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @return array<string, string|false>
      */
-    public function getopt(&$optind = null)
+    public function getopt(&$optind = null): array
     {
         $shortOptions = Value::EMPTY_STRING;
         $longOptions  = Value::EMPTY_ARRAY;
@@ -102,19 +112,32 @@ class MiniGetopt
             }
         }
 
-        return getopt($shortOptions, $longOptions, $optind);
-    }
-
-    /** @noinspection PhpUnused */
-    public function doc()
-    {
-        $doc = 'OPTIONS' . PHP_EOL . PHP_EOL;
-
-        foreach ($this->options as $option) {
-            $doc .= $option->doc() . PHP_EOL;
+        $getopt = getopt($shortOptions, $longOptions, $optind);
+        if (!is_array($getopt)) {
+            throw new MiniGetoptException('Failure when running getopt function');
         }
 
-        return $doc;
+        // @phpstan-ignore-next-line
+        return $getopt;
+    }
+
+    /**
+     * @noinspection PhpUnused
+     * @see          http://docopt.org/
+     */
+    public function doc(): string
+    {
+        $doc       = 'Options:' . PHP_EOL;
+        $reducer   = function (int $carry, Value $value) {
+            return max(mb_strlen($value->getDocNames()), $carry);
+        };
+        $maxLength = array_reduce($this->options, $reducer, 0);
+
+        foreach ($this->options as $option) {
+            $doc .= '  ' . str_pad($option->getDocNames(), $maxLength) . '  ' . $option->getDescription() . PHP_EOL;
+        }
+
+        return $doc . PHP_EOL;
     }
 
     /**
