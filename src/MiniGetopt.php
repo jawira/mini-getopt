@@ -35,11 +35,11 @@ class MiniGetopt
      *
      * @param string $shortOption
      * @param string $longOption
-     * @param string      $description
-     * @param string      $placeholder
+     * @param string $description
+     * @param string $placeholder
      *
-     * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @return $this
      */
     public function addRequired(string $shortOption = Value::EMPTY_STRING,
                                 string $longOption = Value::EMPTY_STRING,
@@ -79,8 +79,8 @@ class MiniGetopt
      * @param string $longOption
      * @param string $description
      *
-     * @return $this
      * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @return $this
      */
     public function addNoValue(string $shortOption = Value::EMPTY_STRING,
                                string $longOption = Value::EMPTY_STRING,
@@ -125,9 +125,10 @@ class MiniGetopt
      * @noinspection PhpUnused
      * @see          http://docopt.org/
      */
-    public function doc(): string
+    public function doc(string $description = ''): string
     {
-        $doc       = 'Options:' . PHP_EOL;
+        $doc       = $description ? $description . PHP_EOL . PHP_EOL : '';
+        $doc       .= 'Options:' . PHP_EOL;
         $reducer   = function (int $carry, Value $value) {
             return max(mb_strlen($value->getDocNames()), $carry);
         };
@@ -144,8 +145,8 @@ class MiniGetopt
      * @param string $shortOption
      * @param string $longOption
      *
-     * @return mixed
      * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @return mixed
      */
     public function getOption(string $shortOption, string $longOption)
     {

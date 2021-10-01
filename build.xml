@@ -34,7 +34,9 @@
   </target>
 
   <target name="behat:run" description="Run behat tests">
-    <exec executable="vendor/bin/behat" passthru="true" checkreturn="true"/>
+    <exec executable="vendor/bin/behat" passthru="true" checkreturn="true">
+      <arg value="--stop-on-failure"/>
+    </exec>
   </target>
 
   <target name="phpstan:analyze" description="Static analysis">
