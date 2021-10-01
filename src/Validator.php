@@ -9,6 +9,7 @@ use function mb_strlen;
  *
  * @author  Jawira Portugal <dev@tugal.be>
  * @package Jawira\MiniGetopt
+ * @internal
  */
 class Validator
 {

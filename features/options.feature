@@ -4,7 +4,7 @@ Feature: Using mini-getopt
   We need to be read options passed by user
 
   Scenario: Using invalid options
-    Given I have the command "php resources/example.php --option --not-require"
+    Given I have the command "php resources/getopt.php --option --not-require"
     When I execute previous command
     Then I should have the following output:
     """
@@ -13,7 +13,7 @@ Feature: Using mini-getopt
     """
 
   Scenario: calling a short option with required value
-    Given I have the command "php resources/example.php -f xml"
+    Given I have the command "php resources/getopt.php -f xml"
     When I execute previous command
     Then I should have the following output:
     """
@@ -22,9 +22,8 @@ Feature: Using mini-getopt
     )
     """
 
-
   Scenario: calling a one long option and two shorts options
-    Given I have the command "php resources/example.php --format=xml -r -v"
+    Given I have the command "php resources/getopt.php --format=xml -r -v"
     When I execute previous command
     Then I should have the following output:
     """
@@ -35,9 +34,8 @@ Feature: Using mini-getopt
     )
     """
 
-
   Scenario:
-    Given I have the command "php resources/example.php -f=json -r=yes -v"
+    Given I have the command "php resources/getopt.php -f=json -r=yes -v"
     When I execute previous command
     Then I should have the following output:
     """
@@ -48,11 +46,8 @@ Feature: Using mini-getopt
     )
     """
 
-
-
-
   Scenario:
-    Given I have the command "php resources/example.php --retry -vvv"
+    Given I have the command "php resources/getopt.php --retry -vvv"
     When I execute previous command
     Then I should have the following output:
     """
@@ -67,16 +62,38 @@ Feature: Using mini-getopt
     )
     """
 
-
-
   Scenario:
-    Given I have the command "php resources/example.php --version=banana --invalid"
+    Given I have the command "php resources/getopt.php --version=banana --invalid"
     When I execute previous command
     Then I should have the following output:
     """
     array (
       'version' => false,
     )
+    """
+
+  Scenario:
+    Given I have the command "php resources/optind.php --foo --bar --help"
+    When I execute previous command
+    Then I should have the following output:
+    """
+    optind: 4
+    
+    """
+
+  Scenario:
+    Given I have the command "php resources/doc.php"
+    When I execute previous command
+    Then I should have the following output:
+    """
+    This is a test command
+    
+    Options:
+      -r --required=<value>  This is a required option
+      -o --optional=[value]  This is an optional option
+      -n --novalue           This has no value
+    
+    
     """
 
 

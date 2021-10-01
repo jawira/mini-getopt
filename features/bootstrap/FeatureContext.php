@@ -24,7 +24,6 @@ class FeatureContext implements Context
     public function iExecutePreviousCommand()
     {
         $this->output = shell_exec($this->command);
-
     }
 
     /**
@@ -36,11 +35,11 @@ class FeatureContext implements Context
      */
     public function iShouldHaveTheFollowingOutput(PyStringNode $expected)
     {
-        $expectedString = (string)$expected;
+        $expectedString = strval($expected);
         $output = $this->output;
 
         if ($expectedString !== $output) {
-            throw new Exception("Output don't match with expected string");
+            throw new Exception("Output don't match with expected string: " . PHP_EOL . gettype($output));
         }
     }
 }
