@@ -2,8 +2,13 @@
 
 namespace Jawira\MiniGetopt;
 
+use function array_map;
 use function array_reduce;
+use function count;
+use function exp;
+use function explode;
 use function getopt;
+use function implode;
 use function is_array;
 use function max;
 use function mb_strlen;
@@ -41,8 +46,7 @@ class MiniGetopt
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return $this
      */
-    public function addRequired(string $shortOption = Value::EMPTY_STRING,
-                                string $longOption = Value::EMPTY_STRING,
+    public function addRequired(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
                                 string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
@@ -62,8 +66,7 @@ class MiniGetopt
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return \Jawira\MiniGetopt\MiniGetopt
      */
-    public function addOptional(string $shortOption = Value::EMPTY_STRING,
-                                string $longOption = Value::EMPTY_STRING,
+    public function addOptional(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
                                 string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
@@ -82,8 +85,7 @@ class MiniGetopt
      * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return $this
      */
-    public function addNoValue(string $shortOption = Value::EMPTY_STRING,
-                               string $longOption = Value::EMPTY_STRING,
+    public function addNoValue(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
                                string $description = Value::EMPTY_STRING): self
     {
         $this->options[] = new NoValue($shortOption, $longOption, $description);
@@ -124,21 +126,60 @@ class MiniGetopt
     /**
      * @noinspection PhpUnused
      * @see          http://docopt.org/
+     *
+     * @param string[] $usages
      */
-    public function doc(string $description = ''): string
+    public function doc(string $description = '', array $usages = []): string
     {
-        $doc       = $description ? $description . PHP_EOL . PHP_EOL : '';
-        $doc       .= 'Options:' . PHP_EOL;
-        $reducer   = function (int $carry, Value $value) {
-            return max(mb_strlen($value->getDocNames()), $carry);
-        };
-        $maxLength = array_reduce($this->options, $reducer, 0);
+        $doc = $description ? $description . PHP_EOL . PHP_EOL : '';
+        $doc .= $this->assembleUsage($usages);
+        $doc .= $this->assembleOptions($this->options);
 
-        foreach ($this->options as $option) {
-            $doc .= '  ' . str_pad($option->getDocNames(), $maxLength) . '  ' . $option->getDescription() . PHP_EOL;
+        return $doc;
+    }
+
+    /**
+     * @param string[] $usages
+     *
+     * @return string
+     */
+    protected function assembleUsage(array $usages): string
+    {
+        if (empty($usages)) {
+            return '';
         }
 
-        return $doc . PHP_EOL;
+        $prepend = function (string $text) {
+            return "  $text";
+        };
+
+        $usages = array_map($prepend, $usages);
+
+        return 'Usage:' . PHP_EOL . implode(PHP_EOL, $usages) . PHP_EOL . PHP_EOL;
+    }
+
+    /**
+     * @param \Jawira\MiniGetopt\Value[] $options
+     *
+     * @return string
+     */
+    protected function assembleOptions(array $options): string
+    {
+        if (empty($options)) {
+            return '';
+        }
+
+        $section = 'Options:' . PHP_EOL;
+        $findMax = function (int $carry, Value $value) {
+            return max(mb_strlen($value->getDocNames()), $carry);
+        };
+        $padding = array_reduce($this->options, $findMax, 0);
+
+        foreach ($options as $option) {
+            $section .= '  ' . str_pad($option->getDocNames(), $padding) . '  ' . $option->getDescription() . PHP_EOL;
+        }
+
+        return $section . PHP_EOL;
     }
 
     /**
