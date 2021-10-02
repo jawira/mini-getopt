@@ -11,6 +11,20 @@
 
 ## Unreleased
 
+## v1.3.0 - 2021-10-2
+
+- Require php 7.4 as minimum php version
+- Add usage (examples) to mini-getopt generated documentation
+
+## v1.2.1 - 2021-10-2
+
+- Move jawira/skeleton to dev dependencies
+
+## v1.2.0 - 2021-10-1
+
+- Add description to mini-getopt generated documentation
+- Documentation complies to "docopt" format
+
 ## v1.1.0 - 2020-11-9
 
 - #8 PHP8 compatibility
