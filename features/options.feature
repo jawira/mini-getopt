@@ -86,8 +86,25 @@ Feature: Using mini-getopt
     When I execute previous command
     Then I should have the following output:
     """
-    This is a test command
+    Usage:
+      test -r=demo
+      test --optional --novalue
+      test -n
     
+    Options:
+      -r --required=<value>  This is a required option
+      -o --optional=[value]  This is an optional option
+      -n --novalue           This has no value
+    
+    ********************
+    This is a test command.
+    
+    Options:
+      -r --required=<value>  This is a required option
+      -o --optional=[value]  This is an optional option
+      -n --novalue           This has no value
+    
+    ********************
     Options:
       -r --required=<value>  This is a required option
       -o --optional=[value]  This is an optional option
