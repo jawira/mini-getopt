@@ -17,12 +17,12 @@
   ],
   "require": {
     "php": ">=7.1",
-    "ext-mbstring": "*",
-    "jawira/skeleton": "^2.6"
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "behat/behat": "^3.8",
     "ergebnis/composer-normalize": "^2.15",
+    "jawira/skeleton": "^2.7",
     "phpstan/phpstan": "^0.12.56"
   },
   "suggest": {
