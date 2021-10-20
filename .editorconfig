@@ -9,10 +9,15 @@ insert_final_newline     = true
 trim_trailing_whitespace = true
 
 [*.php]
-indent_size = 4
+indent_size                                = 4
+ij_php_align_assignments                   = true
+ij_php_blank_lines_before_return_statement = 1
 
 [*.{md, markdown}]
 trim_trailing_whitespace = false
 
 [*.feature]
 trim_trailing_whitespace = false
+
+[.editorconfig]
+ij_editorconfig_align_group_field_declarations = true

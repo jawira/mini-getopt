@@ -27,14 +27,6 @@ class MiniGetopt
     /** @var \Jawira\MiniGetopt\Value[] */
     protected $options = Value::EMPTY_ARRAY;
 
-    /** @var \Jawira\MiniGetopt\Validator */
-    protected $validator;
-
-    public function __construct()
-    {
-        $this->validator = new Validator();
-    }
-
     /**
      * Create an option with required value
      *
@@ -191,7 +183,7 @@ class MiniGetopt
      */
     public function getOption(string $shortOption, string $longOption)
     {
-        if (!$this->validator->isShortOrLong($shortOption, $longOption)) {
+        if (!Validator::isShortOrLong($shortOption, $longOption)) {
             throw new MiniGetoptException('You should define at least short option or long option');
         }
         $getopt = $this->getopt();

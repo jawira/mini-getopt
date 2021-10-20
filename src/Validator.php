@@ -2,7 +2,7 @@
 
 namespace Jawira\MiniGetopt;
 
-use function mb_strlen;
+use function Jawira\TheLostFunctions\str_bytes;
 
 /**
  * Class Validator
@@ -11,36 +11,36 @@ use function mb_strlen;
  * @package Jawira\MiniGetopt
  * @internal
  */
-class Validator
+abstract class Validator
 {
-    public function isShortOption(string $shortOption): bool
+    public static function isShortOption(string $shortOption): bool
     {
-        return mb_strlen($shortOption) === 1;
+        $isAlnum       = ctype_alnum($shortOption);
+        $isSingleChars = str_bytes($shortOption) === 1;
+
+        return $isAlnum && $isSingleChars;
     }
 
-    public function isLongOption(string $longOption): bool
+    public static function isLongOption(string $longOption): bool
     {
-        return mb_strlen($longOption) > 1;
+        $isAlnum     = ctype_alnum($longOption);
+        $isManyChars = str_bytes($longOption) > 1;
+
+        return $isAlnum && $isManyChars;
     }
 
-    public function isEmptyString(string $string): bool
+    public static function isEmptyString(string $string): bool
     {
-        return mb_strlen($string) === 0;
+        return $string === Value::EMPTY_STRING;
     }
 
-    public function isNotEmptyString(string $string): bool
+    public static function isNotEmptyString(string $string): bool
     {
-        return !$this->isEmptyString($string);
+        return !self::isEmptyString($string);
     }
 
-    /**
-     * @param string $shortOption
-     * @param string $longOption
-     *
-     * @return bool
-     */
-    public function isShortOrLong(string $shortOption, string $longOption): bool
+    public static function isShortOrLong(string $shortOption, string $longOption): bool
     {
-        return $this->isShortOption($shortOption) || $this->isLongOption($longOption);
+        return self::isShortOption($shortOption) || self::isLongOption($longOption);
     }
 }
