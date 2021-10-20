@@ -15,10 +15,10 @@ abstract class Validator
 {
     public static function isShortOption(string $shortOption): bool
     {
-        $isAlnum       = ctype_alnum($shortOption);
-        $isSingleChars = str_bytes($shortOption) === 1;
+        $isAlnum   = ctype_alnum($shortOption);
+        $isOneChar = str_bytes($shortOption) === 1;
 
-        return $isAlnum && $isSingleChars;
+        return $isAlnum && $isOneChar;
     }
 
     public static function isLongOption(string $longOption): bool
