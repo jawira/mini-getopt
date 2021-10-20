@@ -110,7 +110,7 @@ class ValidatorTest extends TestCase
      * @covers       \Jawira\MiniGetopt\Validator::isShortOrLong
      * @covers       \Jawira\MiniGetopt\Validator::isShortOption
      * @covers       \Jawira\MiniGetopt\Validator::isLongOption
-     * @testdox      The value "$value" is a short or long option
+     * @testdox      At least one of "$short" or "$long" is a valid option
      */
     function testIsShortOrLong($short, $long, $expected)
     {
