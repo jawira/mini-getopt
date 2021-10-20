@@ -3,6 +3,7 @@
 namespace Jawira\MiniGetopt;
 
 use function implode;
+use function Jawira\TheLostFunctions\throw_unless;
 use function sprintf;
 
 /**
@@ -14,12 +15,12 @@ use function sprintf;
  */
 abstract class Value
 {
-    const NO_VALUE     = '';
-    const REQUIRED     = ':';
-    const OPTIONAL     = '::';
-    const PLACEHOLDER  = 'value';
+    const NO_VALUE = '';
+    const REQUIRED = ':';
+    const OPTIONAL = '::';
+    const PLACEHOLDER = 'value';
     const EMPTY_STRING = '';
-    const EMPTY_ARRAY  = [];
+    const EMPTY_ARRAY = [];
 
     /**
      * @var string Shot option string, one character long
@@ -42,15 +43,10 @@ abstract class Value
     protected $placeholder;
 
     /**
-     * @var \Jawira\MiniGetopt\Validator
-     */
-    protected $validator;
-
-    /**
      * Option constructor.
      *
      * @param string $shortOption One letter
-     * @param string $longOption  One word
+     * @param string $longOption One word
      * @param string $description Option description
      * @param string $placeholder Placeholder for value in doc
      *
@@ -59,12 +55,21 @@ abstract class Value
     public function __construct(string $shortOption = self::EMPTY_STRING, string $longOption = self::EMPTY_STRING,
                                 string $description = self::EMPTY_STRING, string $placeholder = self::PLACEHOLDER)
     {
-        $this->validator = new Validator();
-        if (!$this->validator->isShortOrLong($shortOption, $longOption)) {
+
+        if (!Validator::isShortOrLong($shortOption, $longOption)) {
             throw new MiniGetoptException('You should define at least short option or long option');
         }
+
+        if (Validator::isNotEmptyString($shortOption) && !Validator::isShortOption($shortOption)) {
+            throw new MiniGetoptException('Invalid short option');
+        }
+
+        if (Validator::isNotEmptyString($longOption) && !Validator::isLongOption($longOption)) {
+            throw new MiniGetoptException('Invalid short option');
+        }
+
         $this->shortOption = $shortOption;
-        $this->longOption  = $longOption;
+        $this->longOption = $longOption;
         $this->description = $description;
         $this->placeholder = $placeholder;
     }
@@ -103,18 +108,22 @@ abstract class Value
 
     public function getDocNames(): string
     {
-        $names       = Value::EMPTY_ARRAY;
+        $names = Value::EMPTY_ARRAY;
         $shortOption = $this->shortOption;
-        $longOption  = $this->longOption;
+        $longOption = $this->longOption;
 
-        if ($this->validator->isNotEmptyString($shortOption)) {
+        if (Validator::isNotEmptyString($shortOption)) {
             $names[] = "-$shortOption";
         }
-        if ($this->validator->isNotEmptyString($longOption)) {
+        if (Validator::isNotEmptyString($longOption)) {
             $names[] = "--$longOption";
         }
 
-        // @phpstan-ignore-next-line
-        return sprintf(static::TEMPLATE, implode(' ', $names), $this->placeholder);
+        /**
+         * @psalm-suppress UndefinedConstant
+         * @psalm-suppress MixedArgument
+         * @phpstan-ignore-next-line
+         */
+        return sprintf(strval(static::TEMPLATE), implode(' ', $names), $this->placeholder);
     }
 }

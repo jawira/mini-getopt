@@ -17,13 +17,16 @@
   ],
   "require": {
     "php": "^7.4 || ^8.0",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "jawira/the-lost-functions": "^1.4"
   },
   "require-dev": {
     "behat/behat": "^3.8",
     "ergebnis/composer-normalize": "^2.15",
     "jawira/skeleton": "^2.7",
-    "phpstan/phpstan": "^0.12.56"
+    "phpstan/phpstan": "^0.12.56",
+    "phpunit/phpunit": "^9.5",
+    "vimeo/psalm": "^4.10"
   },
   "suggest": {
     "pds/skeleton": "Standard PHP package skeleton",
@@ -37,6 +40,11 @@
   "autoload": {
     "psr-4": {
       "Jawira\\MiniGetopt\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jawira\\MiniGetoptTests\\": "tests"
     }
   }
 }

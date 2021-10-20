@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project name="jawira/mini-getopt" description="getopt wrapper" default="help">
 
   <property name="composer.flag" value="--dev"/>
 
   <target name="setup" depends="composer:install"/>
-  <target name="qa" depends="composer:normalize,composer:validate,behat:run,phpstan:analyze"/>
+  <target name="qa" depends="composer:normalize,composer:validate,phpunit:run,behat:run,phpstan:analyze,psalm:run"/>
 
   <target name="composer:install" description="PHP dependencies">
     <!-- Use &#45;&#45;no-dev for prod -->
@@ -50,6 +49,10 @@
     </exec>
   </target>
 
+  <target name="psalm:run" description="Static analysis">
+    <exec executable="vendor/bin/psalm" passthru="true" checkreturn="true"/>
+  </target>
+
   <target name="help">
     <uptodate property="uptodate.visualizer" srcfile="build.xml" targetfile="build.svg"/>
     <runtarget target="visualizer"/>
@@ -58,6 +61,19 @@
 
   <target name="visualizer" unless="uptodate.visualizer" description="Create buildfile map">
     <visualizer format="svg"/>
+  </target>
+
+  <target name="phpunit:run" description="Run unitary tests">
+    <exec executable="vendor/bin/phpunit" checkreturn="true" passthru="true">
+      <env key="XDEBUG_MODE" value="coverage"/>
+    </exec>
+  </target>
+
+  <target name="phpunit:testdox" description="Run unitary tests with testdox">
+    <exec executable="vendor/bin/phpunit" checkreturn="true" passthru="true">
+      <env key="XDEBUG_MODE" value="coverage"/>
+      <arg value="--testdox"/>
+    </exec>
   </target>
 
 </project>

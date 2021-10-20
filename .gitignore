@@ -4,3 +4,7 @@
 /composer.lock
 /bin/behat
 /bin/behat.phar
+/.phpunit.cache
+/phpunit.result.cache
+/resources/report
+/cobertura.xml

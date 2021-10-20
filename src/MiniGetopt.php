@@ -27,14 +27,6 @@ class MiniGetopt
     /** @var \Jawira\MiniGetopt\Value[] */
     protected $options = Value::EMPTY_ARRAY;
 
-    /** @var \Jawira\MiniGetopt\Validator */
-    protected $validator;
-
-    public function __construct()
-    {
-        $this->validator = new Validator();
-    }
-
     /**
      * Create an option with required value
      *
@@ -99,7 +91,8 @@ class MiniGetopt
      * @param mixed $optind The index where argument parsing stopped will be written to this variable.
      *
      * @throws \Jawira\MiniGetopt\MiniGetoptException
-     * @return array<string, string|false>
+     *
+     * @return array<string, false|list<mixed>|string>
      */
     public function getopt(&$optind = null): array
     {
@@ -119,7 +112,6 @@ class MiniGetopt
             throw new MiniGetoptException('Failure when running getopt function');
         }
 
-        // @phpstan-ignore-next-line
         return $getopt;
     }
 
@@ -149,7 +141,7 @@ class MiniGetopt
             return '';
         }
 
-        $prepend = function (string $text) {
+        $prepend = function (string $text): string {
             return "  $text";
         };
 
@@ -170,7 +162,7 @@ class MiniGetopt
         }
 
         $section = 'Options:' . PHP_EOL;
-        $findMax = function (int $carry, Value $value) {
+        $findMax = function (int $carry, Value $value): int {
             return max(mb_strlen($value->getDocNames()), $carry);
         };
         $padding = array_reduce($this->options, $findMax, 0);
@@ -191,7 +183,7 @@ class MiniGetopt
      */
     public function getOption(string $shortOption, string $longOption)
     {
-        if (!$this->validator->isShortOrLong($shortOption, $longOption)) {
+        if (!Validator::isShortOrLong($shortOption, $longOption)) {
             throw new MiniGetoptException('You should define at least short option or long option');
         }
         $getopt = $this->getopt();
