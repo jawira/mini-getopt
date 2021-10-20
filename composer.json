@@ -23,7 +23,8 @@
     "behat/behat": "^3.8",
     "ergebnis/composer-normalize": "^2.15",
     "jawira/skeleton": "^2.7",
-    "phpstan/phpstan": "^0.12.56"
+    "phpstan/phpstan": "^0.12.56",
+    "vimeo/psalm": "^4.10"
   },
   "suggest": {
     "pds/skeleton": "Standard PHP package skeleton",

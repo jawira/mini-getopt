@@ -8,3 +8,4 @@
 /README.adoc    export-ignore
 /build.svg      export-ignore
 /build.xml      export-ignore
+/psalm.xml      export-ignore

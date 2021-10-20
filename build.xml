@@ -5,7 +5,7 @@
   <property name="composer.flag" value="--dev"/>
 
   <target name="setup" depends="composer:install"/>
-  <target name="qa" depends="composer:normalize,composer:validate,behat:run,phpstan:analyze"/>
+  <target name="qa" depends="composer:normalize,composer:validate,behat:run,phpstan:analyze,psalm:run"/>
 
   <target name="composer:install" description="PHP dependencies">
     <!-- Use &#45;&#45;no-dev for prod -->
@@ -49,6 +49,10 @@
       <arg path="src"/>
     </exec>
   </target>
+
+<target name="psalm:run" description="Static analysis">
+  <exec executable="vendor/bin/psalm" passthru="true" checkreturn="true"/>
+</target>
 
   <target name="help">
     <uptodate property="uptodate.visualizer" srcfile="build.xml" targetfile="build.svg"/>

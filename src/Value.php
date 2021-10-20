@@ -114,7 +114,11 @@ abstract class Value
             $names[] = "--$longOption";
         }
 
-        // @phpstan-ignore-next-line
-        return sprintf(static::TEMPLATE, implode(' ', $names), $this->placeholder);
+        /**
+         * @psalm-suppress UndefinedConstant
+         * @psalm-suppress MixedArgument
+         * @phpstan-ignore-next-line
+         */
+        return sprintf(strval(static::TEMPLATE), implode(' ', $names), $this->placeholder);
     }
 }

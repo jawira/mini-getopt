@@ -99,7 +99,8 @@ class MiniGetopt
      * @param mixed $optind The index where argument parsing stopped will be written to this variable.
      *
      * @throws \Jawira\MiniGetopt\MiniGetoptException
-     * @return array<string, string|false>
+     *
+     * @return array<string, false|list<mixed>|string>
      */
     public function getopt(&$optind = null): array
     {
@@ -119,7 +120,6 @@ class MiniGetopt
             throw new MiniGetoptException('Failure when running getopt function');
         }
 
-        // @phpstan-ignore-next-line
         return $getopt;
     }
 
@@ -149,7 +149,7 @@ class MiniGetopt
             return '';
         }
 
-        $prepend = function (string $text) {
+        $prepend = function (string $text): string {
             return "  $text";
         };
 
@@ -170,7 +170,7 @@ class MiniGetopt
         }
 
         $section = 'Options:' . PHP_EOL;
-        $findMax = function (int $carry, Value $value) {
+        $findMax = function (int $carry, Value $value): int {
             return max(mb_strlen($value->getDocNames()), $carry);
         };
         $padding = array_reduce($this->options, $findMax, 0);
