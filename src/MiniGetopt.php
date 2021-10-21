@@ -4,20 +4,16 @@ namespace Jawira\MiniGetopt;
 
 use function array_map;
 use function array_reduce;
-use function count;
-use function exp;
-use function explode;
 use function getopt;
 use function implode;
 use function is_array;
-use function Jawira\TheLostFunctions\throw_unless;
 use function max;
 use function mb_strlen;
 use function str_pad;
 use const PHP_EOL;
 
 /**
- * Very simple `getopt()` wrapper
+ * Very simple `getopt()` wrapper.
  *
  * @see     https://www.php.net/manual/en/function.getopt.php
  * @author  Jawira Portugal <dev@tugal.be>
@@ -29,7 +25,7 @@ class MiniGetopt
     protected $options = Value::EMPTY_ARRAY;
 
     /**
-     * Create an option with required value
+     * Create an option with required value.
      *
      * @param string $shortOption
      * @param string $longOption
@@ -50,7 +46,7 @@ class MiniGetopt
     }
 
     /**
-     * Create an option with optional value
+     * Create an option with optional value.
      *
      * @param string $shortOption
      * @param string $longOption
@@ -71,7 +67,7 @@ class MiniGetopt
     }
 
     /**
-     * Create an option without value
+     * Create an option without value.
      *
      * @param string $shortOption
      * @param string $longOption
@@ -90,7 +86,7 @@ class MiniGetopt
     }
 
     /**
-     * Calls `getopt()` function
+     * Calls `getopt()` function.
      *
      * @param mixed $optind The index where argument parsing stopped will be written to this variable.
      *
@@ -120,6 +116,8 @@ class MiniGetopt
     }
 
     /**
+     * Generate cli documentation.
+     *
      * @noinspection PhpUnused
      * @see          http://docopt.org/
      *

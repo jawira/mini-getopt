@@ -3,8 +3,6 @@
 namespace Jawira\MiniGetopt;
 
 /**
- * Class OptionalValue
- *
  * @internal
  * @author  Jawira Portugal <dev@tugal.be>
  * @package Jawira\MiniGetopt
