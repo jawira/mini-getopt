@@ -15,9 +15,6 @@ use function sprintf;
  */
 abstract class Value
 {
-    const NO_VALUE = '';
-    const REQUIRED = ':';
-    const OPTIONAL = '::';
     const PLACEHOLDER = 'value';
     const EMPTY_STRING = '';
     const EMPTY_ARRAY = [];
@@ -69,7 +66,7 @@ abstract class Value
         }
 
         $this->shortOption = $shortOption;
-        $this->longOption = $longOption;
+        $this->longOption  = $longOption;
         $this->description = $description;
         $this->placeholder = $placeholder;
     }
@@ -108,9 +105,9 @@ abstract class Value
 
     public function getDocNames(): string
     {
-        $names = Value::EMPTY_ARRAY;
+        $names       = Value::EMPTY_ARRAY;
         $shortOption = $this->shortOption;
-        $longOption = $this->longOption;
+        $longOption  = $this->longOption;
 
         if (Validator::isNotEmptyString($shortOption)) {
             $names[] = "-$shortOption";
@@ -119,11 +116,6 @@ abstract class Value
             $names[] = "--$longOption";
         }
 
-        /**
-         * @psalm-suppress UndefinedConstant
-         * @psalm-suppress MixedArgument
-         * @phpstan-ignore-next-line
-         */
-        return sprintf(strval(static::TEMPLATE), implode(' ', $names), $this->placeholder);
+        return sprintf($this->getDocTemplate(), implode(' ', $names), $this->placeholder);
     }
 }

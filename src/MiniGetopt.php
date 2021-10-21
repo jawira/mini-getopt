@@ -10,6 +10,7 @@ use function explode;
 use function getopt;
 use function implode;
 use function is_array;
+use function Jawira\TheLostFunctions\throw_unless;
 use function max;
 use function mb_strlen;
 use function str_pad;
@@ -35,10 +36,11 @@ class MiniGetopt
      * @param string $description
      * @param string $placeholder
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return $this
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addRequired(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
+    public function addRequired(string $shortOption = Value::EMPTY_STRING,
+                                string $longOption = Value::EMPTY_STRING,
                                 string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
@@ -55,10 +57,11 @@ class MiniGetopt
      * @param string $description
      * @param string $placeholder
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return \Jawira\MiniGetopt\MiniGetopt
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addOptional(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
+    public function addOptional(string $shortOption = Value::EMPTY_STRING,
+                                string $longOption = Value::EMPTY_STRING,
                                 string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
@@ -74,10 +77,11 @@ class MiniGetopt
      * @param string $longOption
      * @param string $description
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return $this
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addNoValue(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
+    public function addNoValue(string $shortOption = Value::EMPTY_STRING,
+                               string $longOption = Value::EMPTY_STRING,
                                string $description = Value::EMPTY_STRING): self
     {
         $this->options[] = new NoValue($shortOption, $longOption, $description);
@@ -90,9 +94,9 @@ class MiniGetopt
      *
      * @param mixed $optind The index where argument parsing stopped will be written to this variable.
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
-     *
      * @return array<string, false|list<mixed>|string>
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @throws \Throwable
      */
     public function getopt(&$optind = null): array
     {
@@ -178,8 +182,8 @@ class MiniGetopt
      * @param string $shortOption
      * @param string $longOption
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return mixed
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
     public function getOption(string $shortOption, string $longOption)
     {

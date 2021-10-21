@@ -11,15 +11,13 @@ namespace Jawira\MiniGetopt;
  */
 class RequiredValue extends Value
 {
-    const TEMPLATE = '%s=<%s>';
-
     protected function getSeparator(): string
     {
-        return self::REQUIRED;
+        return ':';
     }
 
     protected function getDocTemplate(): string
     {
-        return self::TEMPLATE;
+        return '%s=<%s>';
     }
 }

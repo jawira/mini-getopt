@@ -11,7 +11,7 @@ use function Jawira\TheLostFunctions\str_bytes;
  * @package Jawira\MiniGetopt
  * @internal
  */
-abstract class Validator
+class Validator
 {
     /**
      * Tells if $shortOption is a valid short option.

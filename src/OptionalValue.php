@@ -11,15 +11,13 @@ namespace Jawira\MiniGetopt;
  */
 class OptionalValue extends Value
 {
-    const TEMPLATE = '%s=[%s]';
-
     protected function getSeparator(): string
     {
-        return self::OPTIONAL;
+        return '::';
     }
 
     protected function getDocTemplate(): string
     {
-        return self::TEMPLATE;
+        return '%s=[%s]';
     }
 }
