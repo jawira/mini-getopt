@@ -12,6 +12,9 @@ trim_trailing_whitespace = true
 indent_size                                = 4
 ij_php_align_assignments                   = true
 ij_php_blank_lines_before_return_statement = 1
+ij_php_align_key_value_pairs               = true
+ij_php_align_multiline_parameters          = true
+ij_php_align_phpdoc_param_names            = true
 
 [*.{md, markdown}]
 trim_trailing_whitespace = false

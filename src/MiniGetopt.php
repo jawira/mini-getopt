@@ -4,9 +4,6 @@ namespace Jawira\MiniGetopt;
 
 use function array_map;
 use function array_reduce;
-use function count;
-use function exp;
-use function explode;
 use function getopt;
 use function implode;
 use function is_array;
@@ -16,7 +13,7 @@ use function str_pad;
 use const PHP_EOL;
 
 /**
- * Very simple `getopt()` wrapper
+ * Very simple `getopt()` wrapper.
  *
  * @see     https://www.php.net/manual/en/function.getopt.php
  * @author  Jawira Portugal <dev@tugal.be>
@@ -28,17 +25,18 @@ class MiniGetopt
     protected $options = Value::EMPTY_ARRAY;
 
     /**
-     * Create an option with required value
+     * Create an option with required value.
      *
      * @param string $shortOption
      * @param string $longOption
      * @param string $description
      * @param string $placeholder
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return $this
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addRequired(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
+    public function addRequired(string $shortOption = Value::EMPTY_STRING,
+                                string $longOption = Value::EMPTY_STRING,
                                 string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
@@ -48,17 +46,18 @@ class MiniGetopt
     }
 
     /**
-     * Create an option with optional value
+     * Create an option with optional value.
      *
      * @param string $shortOption
      * @param string $longOption
      * @param string $description
      * @param string $placeholder
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return \Jawira\MiniGetopt\MiniGetopt
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addOptional(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
+    public function addOptional(string $shortOption = Value::EMPTY_STRING,
+                                string $longOption = Value::EMPTY_STRING,
                                 string $description = Value::EMPTY_STRING,
                                 string $placeholder = Value::PLACEHOLDER): self
     {
@@ -68,16 +67,17 @@ class MiniGetopt
     }
 
     /**
-     * Create an option without value
+     * Create an option without value.
      *
      * @param string $shortOption
      * @param string $longOption
      * @param string $description
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return $this
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
-    public function addNoValue(string $shortOption = Value::EMPTY_STRING, string $longOption = Value::EMPTY_STRING,
+    public function addNoValue(string $shortOption = Value::EMPTY_STRING,
+                               string $longOption = Value::EMPTY_STRING,
                                string $description = Value::EMPTY_STRING): self
     {
         $this->options[] = new NoValue($shortOption, $longOption, $description);
@@ -86,13 +86,13 @@ class MiniGetopt
     }
 
     /**
-     * Calls `getopt()` function
+     * Calls `getopt()` function.
      *
      * @param mixed $optind The index where argument parsing stopped will be written to this variable.
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
-     *
      * @return array<string, false|list<mixed>|string>
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
+     * @throws \Throwable
      */
     public function getopt(&$optind = null): array
     {
@@ -116,6 +116,8 @@ class MiniGetopt
     }
 
     /**
+     * Generate cli documentation.
+     *
      * @noinspection PhpUnused
      * @see          http://docopt.org/
      *
@@ -178,8 +180,8 @@ class MiniGetopt
      * @param string $shortOption
      * @param string $longOption
      *
-     * @throws \Jawira\MiniGetopt\MiniGetoptException
      * @return mixed
+     * @throws \Jawira\MiniGetopt\MiniGetoptException
      */
     public function getOption(string $shortOption, string $longOption)
     {
