@@ -45,16 +45,16 @@ abstract class Value
                                 string $placeholder = self::PLACEHOLDER)
     {
 
-        if (!Validator::isShortOrLong($shortOption, $longOption)) {
-            throw new MiniGetoptException('You should define at least short option or long option');
-        }
-
         if (Validator::isNotEmptyString($shortOption) && !Validator::isShortOption($shortOption)) {
             throw new MiniGetoptException('Invalid short option');
         }
 
         if (Validator::isNotEmptyString($longOption) && !Validator::isLongOption($longOption)) {
-            throw new MiniGetoptException('Invalid short option');
+            throw new MiniGetoptException('Invalid long option');
+        }
+
+        if (!Validator::isShortOrLong($shortOption, $longOption)) {
+            throw new MiniGetoptException('You should define at least short option or long option');
         }
 
         $this->shortOption = $shortOption;

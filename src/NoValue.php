@@ -9,7 +9,9 @@ namespace Jawira\MiniGetopt;
  */
 class NoValue extends Value
 {
-    public function __construct(string $shortOption, string $longOption, string $description = self::EMPTY_STRING)
+    public function __construct(string $shortOption = self::EMPTY_STRING,
+                                string $longOption = self::EMPTY_STRING,
+                                string $description = self::EMPTY_STRING)
     {
         parent::__construct($shortOption, $longOption, $description, self::EMPTY_STRING);
     }

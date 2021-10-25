@@ -15,6 +15,8 @@ ij_php_blank_lines_before_return_statement = 1
 ij_php_align_key_value_pairs               = true
 ij_php_align_multiline_parameters          = true
 ij_php_align_phpdoc_param_names            = true
+ij_php_align_multiline_chained_methods     = true
+ij_php_phpdoc_use_fqcn                     = true
 
 [*.{md, markdown}]
 trim_trailing_whitespace = false
