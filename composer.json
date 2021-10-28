@@ -23,6 +23,7 @@
   "require-dev": {
     "behat/behat": "^3.8",
     "ergebnis/composer-normalize": "^2.15",
+    "icanhazstring/composer-unused": "^0.7.7",
     "jawira/skeleton": "^2.7",
     "phpstan/phpstan": "^0.12.56",
     "phpunit/phpunit": "^9.5",

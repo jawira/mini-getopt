@@ -4,7 +4,7 @@
   <property name="composer.flag" value="--dev"/>
 
   <target name="setup" depends="composer:install"/>
-  <target name="qa" depends="composer:normalize,composer:validate,phpunit:run,behat:run,phpstan:analyze,psalm:run"/>
+  <target name="qa" depends="composer:normalize,composer:validate,composer:unused,phpunit:run,behat:run,phpstan:analyze,psalm:run"/>
 
   <target name="composer:install" description="PHP dependencies">
     <!-- Use &#45;&#45;no-dev for prod -->
@@ -29,6 +29,12 @@
       <arg value="--diff"/>
       <arg value="--indent-size=2"/>
       <arg value="--indent-style=space"/>
+    </composer>
+  </target>
+
+  <target name="composer:unused" description="Show unused composer dependencies">
+    <composer command="unused">
+      <arg line="--no-progress --ansi"/>
     </composer>
   </target>
 
