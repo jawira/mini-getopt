@@ -1,14 +1,14 @@
 {
   "name": "jawira/mini-getopt",
-  "type": "library",
   "description": "Very simple wrapper for getopt() function",
+  "license": "MIT",
+  "type": "library",
   "keywords": [
     "getopt",
     "cli",
     "option",
     "terminal"
   ],
-  "license": "MIT",
   "authors": [
     {
       "name": "Jawira Portugal",
@@ -24,18 +24,13 @@
     "behat/behat": "^3.8",
     "ergebnis/composer-normalize": "^2.15",
     "jawira/skeleton": "^2.7",
-    "phpstan/phpstan": "^0.12.56",
+    "phpstan/phpstan": "^1.9",
     "phpunit/phpunit": "^9.5",
     "vimeo/psalm": "^4.10"
   },
   "suggest": {
     "pds/skeleton": "Standard PHP package skeleton",
     "phing/phing": "PHP Build Tool"
-  },
-  "config": {
-    "platform-check": true,
-    "preferred-install": "dist",
-    "sort-packages": true
   },
   "autoload": {
     "psr-4": {
@@ -46,5 +41,13 @@
     "psr-4": {
       "Jawira\\MiniGetoptTests\\": "tests"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    },
+    "platform-check": true,
+    "preferred-install": "dist",
+    "sort-packages": true
   }
 }
