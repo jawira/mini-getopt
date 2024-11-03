@@ -2,6 +2,7 @@
 
 namespace Jawira\MiniGetopt;
 
+use function ctype_alnum;
 use function Jawira\TheLostFunctions\str_bytes;
 
 /**
