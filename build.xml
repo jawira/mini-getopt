@@ -4,7 +4,7 @@
   <property name="composer.flag" value="--dev"/>
 
   <target name="setup" depends="composer:install"/>
-  <target name="qa" depends="composer:normalize,composer:validate,phpunit:run,behat:run,phpstan:analyze,psalm:run"/>
+  <target name="qa" depends="composer:validate,phpunit:run,behat:run,phpstan:analyze,psalm:run"/>
 
   <target name="composer:install" description="PHP dependencies">
     <!-- Use &#45;&#45;no-dev for prod -->
@@ -20,15 +20,6 @@
   <target name="composer:validate" description="Validate composer.json">
     <composer command="validate">
       <arg value="--ansi"/>
-    </composer>
-  </target>
-
-  <target name="composer:normalize" description="Normalize composer.json">
-    <composer command="normalize">
-      <arg value="--ansi"/>
-      <arg value="--diff"/>
-      <arg value="--indent-size=2"/>
-      <arg value="--indent-style=space"/>
     </composer>
   </target>
 

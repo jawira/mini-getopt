@@ -2,6 +2,7 @@
 
 namespace Jawira\MiniGetopt;
 
+use function array_key_exists;
 use function array_map;
 use function array_reduce;
 use function getopt;

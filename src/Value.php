@@ -94,9 +94,7 @@ abstract class Value
         $shortOption = $this->shortOption;
         $longOption  = $this->longOption;
 
-        if (Validator::isNotEmptyString($shortOption)) {
-            $names[] = "-$shortOption";
-        }
+        $names[] = Validator::isNotEmptyString($shortOption) ? "-$shortOption" : '  ';
         if (Validator::isNotEmptyString($longOption)) {
             $names[] = "--$longOption";
         }
